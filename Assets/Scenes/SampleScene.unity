@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 925006305}
   - component: {fileID: 925006304}
   - component: {fileID: 925006303}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -767,6 +767,7 @@ GameObject:
   - component: {fileID: 1388693032}
   - component: {fileID: 1388693031}
   - component: {fileID: 1388693030}
+  - component: {fileID: 1388693035}
   - component: {fileID: 1388693029}
   m_Layer: 0
   m_Name: Enemy
@@ -811,7 +812,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointA: {fileID: 733421234}
   PointB: {fileID: 101774943}
-  player: {fileID: 925006308}
 --- !u!65 &1388693031
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -899,6 +899,19 @@ Transform:
   - {fileID: 592296492}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1388693035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388693028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab63f839844f9f4a94f5de730de49e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 925006308}
 --- !u!1 &1507700674
 GameObject:
   m_ObjectHideFlags: 0
