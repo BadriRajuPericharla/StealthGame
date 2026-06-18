@@ -29,7 +29,8 @@ public class PlayerMovement : MonoBehaviour
             yvelocity=jumpForce;
         }
         yvelocity+=gravity*Time.deltaTime;
-        Vector3 movement=new Vector3(horizontal,0f,vertical).normalized;
+        Vector3 movement=transform.right*horizontal+transform.forward*vertical;
+        movement.Normalize();
         movement*=speed;
         movement.y=yvelocity;
         controller.Move(movement*Time.deltaTime);
