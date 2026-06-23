@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         movement*=speed;
         movement.y=yvelocity;
         controller.Move(movement*Time.deltaTime);
-        if(horizontal>0f||vertical>0f)
+        if(Mathf.Abs(horizontal)>0.1f||Mathf.Abs(vertical)>0.1f)
         {
             PlayerAnimator.SetBool("IsWalk",true);
         }
