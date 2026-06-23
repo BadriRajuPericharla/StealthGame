@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
-  - component: {fileID: 6474854}
+  - component: {fileID: 21865490075985735}
   m_Layer: 0
   m_Name: Arch_Gate
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6474854
+--- !u!64 &21865490075985735
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,4 +105,4 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300114, guid: 628e5212ccbe5044ba8b70740d37394e, type: 3}
+  m_Mesh: {fileID: 4300010, guid: fd75e63c14c4540438372a6844af68b6, type: 3}
