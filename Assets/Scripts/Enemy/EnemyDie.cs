@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyDie : MonoBehaviour
 {
     public GameObject key;
-
-    void OnControllerColliderHit(ControllerColliderHit hit)
+    public float AttackRange=2f;
+    public Transform PlayerPosition;
+    void Update()
     {
-        if (hit.gameObject.tag == "Enemy")
+        float distance=Vector3.Distance(transform.position,PlayerPosition.transform.position);
+        if(distance<AttackRange && Input.GetMouseButton(0))
         {
             key.transform.parent=null;
             key.SetActive(true);
-            Destroy(hit.gameObject);
-            Debug.Log("Collided");
+            Destroy(gameObject);
+            Debug.Log("died");
         }
     }
 }
