@@ -14,11 +14,11 @@ public class PlayerDetection : MonoBehaviour
         
         float angle=Vector3.Angle(transform.forward,directionToPlayer);
         float distance=Vector3.Distance(transform.position,player.position);
-        if (angle < 45 && distance<7f)
+        if (angle < 45 && distance<8f)
         {
 
             RaycastHit hit;
-           if(Physics.Raycast(eyeposition,directionToPlayer.normalized,out hit, 7f))
+           if(Physics.Raycast(eyeposition,directionToPlayer.normalized,out hit, 8f))
             {
                 if (hit.transform == player)
                 {

@@ -26,7 +26,7 @@ public class KeysClaiming : MonoBehaviour
             {
                 if (other.gameObject.name.Contains(keys.TreasureKeyPrefab[i].name))
                 {
-                    inventory.AddDoorKey(keys.TreasureKeyName[i]);
+                    inventory.AddTreasureKey(keys.TreasureKeyName[i]);
                     other.gameObject.SetActive(false);
                     break;
                 }

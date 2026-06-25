@@ -13,7 +13,7 @@ public class TreasureOpening : MonoBehaviour
     void Update()
     {
         float distance=Vector3.Distance(transform.position,player.transform.position);
-        if (Input.GetKeyDown(KeyCode.E)&&distance<ClaimRange)
+        if (Input.GetKeyDown(KeyCode.E) && distance<ClaimRange)
         {
             allKeysCollected=true;
             for(int i = 0; i < RequiredKeyNames.Length; i++)
