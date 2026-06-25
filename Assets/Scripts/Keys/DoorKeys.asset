@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dca248460c2adc419982fb76e100b69, type: 3}
+  m_Name: DoorKeys
+  m_EditorClassIdentifier: 
+  DoorKeyName:
+  - Key-1
+  - Key-2
+  - Key-3
+  DoorKeyPrefab:
+  - {fileID: 5151747187069840053, guid: 9dd18d1c963a15b4da2dbb25c7e8acfe, type: 3}
+  - {fileID: 5151747187069840053, guid: a03b4aa3f296ca34eb1089c6977360b7, type: 3}
+  - {fileID: 5151747187069840053, guid: e55c134f7a172294999ff268af751ab4, type: 3}
+  TreasureKeyName:
+  - Treasure-1
+  - Treasure-2
+  - Treasure-3
+  TreasureKeyPrefab:
+  - {fileID: 5151747187069840053, guid: fc537bdc9469ffe4bb15385102b32a56, type: 3}
+  - {fileID: 5151747187069840053, guid: e4c57e16263951b46a02b173729cfd47, type: 3}
+  - {fileID: 5151747187069840053, guid: ee96afe6fe796544f8f480f1816774a6, type: 3}

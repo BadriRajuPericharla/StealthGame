@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DoorOpening : MonoBehaviour
 {
+    public Transform player;
+    public InventoryManager inventory;
+    public string RequiredKey;
     private bool isOpenDoor1 = false;
     bool hasOpened1=false;
-    public GameObject key1;
+    
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R) && key1!=null && !hasOpened1)
+        float distance=Vector3.Distance(transform.position,player.transform.position);
+        if(Input.GetKeyDown(KeyCode.R)  && !hasOpened1 && inventory.HasDoorKey(RequiredKey) && distance<5f)
         {
             isOpenDoor1 = true;
             hasOpened1=true;
