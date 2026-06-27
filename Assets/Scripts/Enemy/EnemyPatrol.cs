@@ -16,7 +16,9 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
-        if(!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.2f)
+        if (navMeshAgent.isActiveAndEnabled)
+        {
+            if(!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.2f)
         {
             if (goingToB)
             {
@@ -28,6 +30,8 @@ public class Enemy : MonoBehaviour
             }
             goingToB=!goingToB;
         }
+        }
+        
         
     }
     

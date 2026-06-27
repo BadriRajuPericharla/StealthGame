@@ -1092,14 +1092,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2.467618
+  m_Height: 1.7463516
   m_Direction: 1
-  m_Center: {x: 0, y: 0.7338084, z: 0}
+  m_Center: {x: 0, y: 0.73775303, z: 0}
 --- !u!1001 &66281469
 PrefabInstance:
   m_ObjectHideFlags: 0
