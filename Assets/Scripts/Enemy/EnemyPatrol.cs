@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class EnemyPatrol : MonoBehaviour
 {
     public Transform PointA;
     public Transform PointB;
-    private NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent;
     bool goingToB=false;
     void Start()
     {
@@ -19,17 +19,17 @@ public class Enemy : MonoBehaviour
         if (navMeshAgent.isActiveAndEnabled)
         {
             if(!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.2f)
-        {
-            if (goingToB)
             {
-                navMeshAgent.SetDestination(PointB.position);
+                if (goingToB)
+                {
+                    navMeshAgent.SetDestination(PointB.position);
+                }
+                else
+                {
+                    navMeshAgent.SetDestination(PointA.position);
+                }
+                goingToB=!goingToB;
             }
-            else
-            {
-                navMeshAgent.SetDestination(PointA.position);
-            }
-            goingToB=!goingToB;
-        }
         }
         
         

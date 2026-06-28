@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class EnemyDie : MonoBehaviour
 {
     public GameObject key;
+    public GameObject SpotLigth;
     Animator enemyAnimator;
     CapsuleCollider capsuleCollider;
     NavMeshAgent navMeshAgent;
@@ -34,6 +35,7 @@ public class EnemyDie : MonoBehaviour
     IEnumerator Death()
     {
         enemyAnimator.SetBool("IsDie",true);
+        SpotLigth.SetActive(false);
         key.transform.parent=null;
         yield return new WaitForSeconds(2f);
         key.SetActive(true);

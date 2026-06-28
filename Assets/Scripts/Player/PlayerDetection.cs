@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerDetection : MonoBehaviour
 {
     [SerializeField]private Transform player;
+    EnemyPatrol enemyPatrol;
+    void Start()
+    {
+        enemyPatrol=GetComponent<EnemyPatrol>();
+    }
     void Update()
     {
         Vector3 eyeposition=transform.position + Vector3.up*1.5f;
@@ -18,13 +24,31 @@ public class PlayerDetection : MonoBehaviour
         {
 
             RaycastHit hit;
+            
            if(Physics.Raycast(eyeposition,directionToPlayer.normalized,out hit, 8f))
             {
                 if (hit.transform == player)
-                {
-                    Debug.Log("Detected");
+                {   
+                    enemyPatrol.navMeshAgent.isStopped=false;
+                    enemyPatrol.navMeshAgent.speed=4f;
+                    enemyPatrol.navMeshAgent.SetDestination(player.position);
+                    Debug.Log("Detected"); 
+                    if (distance < 2f)
+                    {
+                        enemyPatrol.navMeshAgent.isStopped=true;
+                        Debug.Log("attack");
+                    }
+            
                 }
+                
             }
+            
         }
+        if (enemyPatrol.gameObject!=null)
+        {
+            enemyPatrol.navMeshAgent.isStopped=false;
+            enemyPatrol.navMeshAgent.speed=2f;
+        }
+        
     }
 }

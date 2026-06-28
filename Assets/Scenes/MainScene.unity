@@ -1020,6 +1020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: {fileID: 1783310328}
+  SpotLigth: {fileID: 1462188592}
   AttackRange: 2
   PlayerPosition: {fileID: 1905032784}
 --- !u!195 &63247003
@@ -1058,6 +1059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointA: {fileID: 827941994}
   PointB: {fileID: 688422651}
+  navMeshAgent: {fileID: 0}
 --- !u!114 &63247005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39204,6 +39206,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key-3
       objectReference: {fileID: 0}
+    - target: {fileID: 374289202576707483, guid: e55c134f7a172294999ff268af751ab4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: e55c134f7a172294999ff268af751ab4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -39212,37 +39219,37 @@ PrefabInstance:
     - target: {fileID: 3705028537381535112, guid: e55c134f7a172294999ff268af751ab4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.44508
+      value: 0.541752
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: e55c134f7a172294999ff268af751ab4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.038
+      value: 0.18029623
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: e55c134f7a172294999ff268af751ab4,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.86601394
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: e55c134f7a172294999ff268af751ab4,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.49999344
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: e55c134f7a172294999ff268af751ab4,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.0025691537
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: e55c134f7a172294999ff268af751ab4,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.004449905
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: e55c134f7a172294999ff268af751ab4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: e55c134f7a172294999ff268af751ab4,
         type: 3}
@@ -39252,7 +39259,7 @@ PrefabInstance:
     - target: {fileID: 3705028537381535112, guid: e55c134f7a172294999ff268af751ab4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -0.589
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39532,7 +39539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1905032784}
-  mouseSensitivity: 200
+  mouseSensitivity: 100
 --- !u!1 &663718958
 GameObject:
   m_ObjectHideFlags: 0
@@ -39793,27 +39800,27 @@ PrefabInstance:
     - target: {fileID: 3705028537381535112, guid: a03b4aa3f296ca34eb1089c6977360b7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.8660254
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: a03b4aa3f296ca34eb1089c6977360b7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: a03b4aa3f296ca34eb1089c6977360b7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: a03b4aa3f296ca34eb1089c6977360b7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: a03b4aa3f296ca34eb1089c6977360b7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: a03b4aa3f296ca34eb1089c6977360b7,
         type: 3}
@@ -79666,6 +79673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: {fileID: 1312485395}
+  SpotLigth: {fileID: 579383894}
   AttackRange: 2
   PlayerPosition: {fileID: 1905032784}
 --- !u!195 &1165448227
@@ -79704,6 +79712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointA: {fileID: 827941994}
   PointB: {fileID: 688422651}
+  navMeshAgent: {fileID: 0}
 --- !u!114 &1165448229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101807,7 +101816,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b39241496d6010d4cbf945c2ea2391eb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.54
+      value: -5.35
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b39241496d6010d4cbf945c2ea2391eb,
         type: 3}
@@ -126072,27 +126081,27 @@ PrefabInstance:
     - target: {fileID: 3705028537381535112, guid: cfc59dd80c719cb4688ceef984e7384e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.8660254
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: cfc59dd80c719cb4688ceef984e7384e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: cfc59dd80c719cb4688ceef984e7384e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: cfc59dd80c719cb4688ceef984e7384e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: cfc59dd80c719cb4688ceef984e7384e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3705028537381535112, guid: cfc59dd80c719cb4688ceef984e7384e,
         type: 3}
@@ -140651,6 +140660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: {fileID: 1648315452}
+  SpotLigth: {fileID: 663718958}
   AttackRange: 2
   PlayerPosition: {fileID: 1905032784}
 --- !u!195 &2094268632
@@ -140689,6 +140699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointA: {fileID: 1254970999}
   PointB: {fileID: 106833615}
+  navMeshAgent: {fileID: 0}
 --- !u!114 &2094268634
 MonoBehaviour:
   m_ObjectHideFlags: 0
