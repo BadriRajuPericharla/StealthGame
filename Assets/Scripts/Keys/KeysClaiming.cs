@@ -10,11 +10,13 @@ public class KeysClaiming : MonoBehaviour
     {
         if (other.gameObject.tag == "DoorKey")
         {
+            Debug.Log("Touched: " + other.name);
             for(int i = 0; i < keys.DoorKeyPrefab.Length; i++)
             {
                 if (other.gameObject.name.Contains(keys.DoorKeyPrefab[i].name))
                 {
                     inventory.AddDoorKey(keys.DoorKeyName[i]);
+                    
                     other.gameObject.SetActive(false);
                     break;
                 }
