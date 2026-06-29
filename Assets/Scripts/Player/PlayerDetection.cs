@@ -6,10 +6,13 @@ using UnityEngine.AI;
 public class PlayerDetection : MonoBehaviour
 {
     [SerializeField]private Transform player;
+    [SerializeField]private PlayerMovement playerMovement;
     EnemyPatrol enemyPatrol;
+    Animator enemyAnimator;
     void Start()
     {
         enemyPatrol=GetComponent<EnemyPatrol>();
+        enemyAnimator=GetComponent<Animator>();
     }
     void Update()
     {
@@ -36,7 +39,15 @@ public class PlayerDetection : MonoBehaviour
                     if (distance < 2f)
                     {
                         enemyPatrol.navMeshAgent.isStopped=true;
+                        playerMovement.PlayerAnimator.SetBool("IsDie",true);
+                        playerMovement.enabled=false;
+                        enemyAnimator.SetBool("IsAttack",true);
                         Debug.Log("attack");
+                    }
+                    else
+                    {
+                        enemyPatrol.navMeshAgent.isStopped=false;
+                        enemyAnimator.SetBool("IsAttack",false);
                     }
             
                 }
@@ -44,7 +55,7 @@ public class PlayerDetection : MonoBehaviour
             }
             
         }
-        if (enemyPatrol.gameObject!=null)
+        else
         {
             enemyPatrol.navMeshAgent.isStopped=false;
             enemyPatrol.navMeshAgent.speed=2f;

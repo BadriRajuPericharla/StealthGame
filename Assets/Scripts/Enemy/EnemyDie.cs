@@ -12,6 +12,7 @@ public class EnemyDie : MonoBehaviour
     Animator enemyAnimator;
     CapsuleCollider capsuleCollider;
     NavMeshAgent navMeshAgent;
+    PlayerDetection playerDetection;
     public float AttackRange=2f;
     public Transform PlayerPosition;
     void Start()
@@ -19,6 +20,7 @@ public class EnemyDie : MonoBehaviour
         enemyAnimator=GetComponent<Animator>();
         capsuleCollider=GetComponent<CapsuleCollider>();
         navMeshAgent=GetComponent<NavMeshAgent>();
+        playerDetection=GetComponent<PlayerDetection>();
     }
     void Update()
     {
@@ -28,6 +30,7 @@ public class EnemyDie : MonoBehaviour
             enemyAnimator.applyRootMotion=true;
             capsuleCollider.enabled=false;
             navMeshAgent.enabled=false;
+            playerDetection.enabled=false;
             StartCoroutine(Death());
             Debug.Log("died");
         }
