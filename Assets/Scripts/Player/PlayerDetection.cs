@@ -7,12 +7,13 @@ public class PlayerDetection : MonoBehaviour
 {
     [SerializeField]private Transform player;
     [SerializeField]private PlayerMovement playerMovement;
+    bool hasAttacked=false;
     EnemyPatrol enemyPatrol;
-    Animator enemyAnimator;
+    EnemyAnimations enemyAnimations;
     void Start()
     {
         enemyPatrol=GetComponent<EnemyPatrol>();
-        enemyAnimator=GetComponent<Animator>();
+        enemyAnimations=GetComponent<EnemyAnimations>();
     }
     void Update()
     {
@@ -36,18 +37,18 @@ public class PlayerDetection : MonoBehaviour
                     enemyPatrol.navMeshAgent.speed=4f;
                     enemyPatrol.navMeshAgent.SetDestination(player.position);
                     Debug.Log("Detected"); 
-                    if (distance < 2f)
+                    if (distance < 2f&&!hasAttacked)
                     {
+                        hasAttacked=true;
                         enemyPatrol.navMeshAgent.isStopped=true;
-                        playerMovement.PlayerAnimator.SetBool("IsDie",true);
+                        playerMovement.playerAnimations.PlayDeathAnimation();
+                        enemyAnimations.PlayAttackAnimation();
                         playerMovement.enabled=false;
-                        enemyAnimator.SetBool("IsAttack",true);
                         Debug.Log("attack");
                     }
                     else
                     {
                         enemyPatrol.navMeshAgent.isStopped=false;
-                        enemyAnimator.SetBool("IsAttack",false);
                     }
             
                 }

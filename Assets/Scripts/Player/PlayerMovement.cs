@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private float speed=5f;
     [SerializeField]private float gravity=-10f;
     [SerializeField]private float jumpForce=4f;
-    public Animator PlayerAnimator;
+    public PlayerAnimations playerAnimations;
     private CharacterController controller;
     private float yvelocity;
     void Start()
@@ -37,12 +37,13 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(movement*Time.deltaTime);
         if(Mathf.Abs(horizontal)>0.1f||Mathf.Abs(vertical)>0.1f)
         {
-            PlayerAnimator.SetBool("IsWalk",true);
+            playerAnimations.PlayWalkAnimation();
         }
         else
         {
-            PlayerAnimator.SetBool("IsWalk",false);
+            playerAnimations.StopWalkAnimation();
         }
     }
+    
 
 }

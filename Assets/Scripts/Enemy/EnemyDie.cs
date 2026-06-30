@@ -9,7 +9,7 @@ public class EnemyDie : MonoBehaviour
 {
     public GameObject key;
     public GameObject SpotLigth;
-    Animator enemyAnimator;
+    EnemyAnimations enemyAnimations;
     CapsuleCollider capsuleCollider;
     NavMeshAgent navMeshAgent;
     PlayerDetection playerDetection;
@@ -17,7 +17,7 @@ public class EnemyDie : MonoBehaviour
     public Transform PlayerPosition;
     void Start()
     {
-        enemyAnimator=GetComponent<Animator>();
+        enemyAnimations=GetComponent<EnemyAnimations>();
         capsuleCollider=GetComponent<CapsuleCollider>();
         navMeshAgent=GetComponent<NavMeshAgent>();
         playerDetection=GetComponent<PlayerDetection>();
@@ -27,7 +27,7 @@ public class EnemyDie : MonoBehaviour
         float distance=Vector3.Distance(transform.position,PlayerPosition.transform.position);
         if(distance<AttackRange && Input.GetMouseButton(0))
         {
-            enemyAnimator.applyRootMotion=true;
+            enemyAnimations.enemyAnimator.applyRootMotion=true;
             capsuleCollider.enabled=false;
             navMeshAgent.enabled=false;
             playerDetection.enabled=false;
@@ -37,7 +37,7 @@ public class EnemyDie : MonoBehaviour
     }
     IEnumerator Death()
     {
-        enemyAnimator.SetBool("IsDie",true);
+        enemyAnimations.PlayDeathAnimation();
         SpotLigth.SetActive(false);
         key.transform.parent=null;
         yield return new WaitForSeconds(2f);
