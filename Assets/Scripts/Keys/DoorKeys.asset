@@ -16,10 +16,12 @@ MonoBehaviour:
   - Key-1
   - Key-2
   - Key-3
+  - Key-4
   DoorKeyPrefab:
   - {fileID: 374289202576707483, guid: cfc59dd80c719cb4688ceef984e7384e, type: 3}
   - {fileID: 374289202576707483, guid: a03b4aa3f296ca34eb1089c6977360b7, type: 3}
   - {fileID: 374289202576707483, guid: e55c134f7a172294999ff268af751ab4, type: 3}
+  - {fileID: 1635809406074910013, guid: 5c2aaedb0c3f83a4bb9b6524cc699ce5, type: 3}
   TreasureKeyName:
   - Treasure-1
   - Treasure-2

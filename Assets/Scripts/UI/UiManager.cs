@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
+    [SerializeField]private PlayerMovement playerMovement;
+    [SerializeField]private PlayerAttack playerAttack;
+    [SerializeField]private CameraMovement cameraMovement;
+    [SerializeField]private KeysClaiming keysClaiming;
     [SerializeField]private GameObject mainMenuPanel;
     [SerializeField]private GameObject gameOverPanel;
     [SerializeField]private GameObject gameCompletePanel;
@@ -41,11 +45,19 @@ public class UiManager : MonoBehaviour
     public void ShowGameOver()
     {
         gameOverPanel.SetActive(true);
+        playerMovement.enabled=false;
+        playerAttack.enabled=false;
+        cameraMovement.enabled=false;
+        keysClaiming.enabled=false;
         Cursor.lockState=CursorLockMode.None;
     }
     public void ShowGameComplete()
     {
         gameCompletePanel.SetActive(true);
+        playerMovement.enabled=false;
+        playerAttack.enabled=false;
+        cameraMovement.enabled=false;
+        keysClaiming.enabled=false;
         Cursor.lockState=CursorLockMode.None;
     }
     public void PlayButton()
