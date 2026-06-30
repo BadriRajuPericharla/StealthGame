@@ -7,6 +7,7 @@ public class PlayerDetection : MonoBehaviour
 {
     [SerializeField]private Transform player;
     [SerializeField]private PlayerMovement playerMovement;
+    [SerializeField]private PlayerAttack playerAttack;
     bool hasAttacked=false;
     EnemyPatrol enemyPatrol;
     EnemyAnimations enemyAnimations;
@@ -36,6 +37,7 @@ public class PlayerDetection : MonoBehaviour
                     enemyPatrol.navMeshAgent.isStopped=false;
                     enemyPatrol.navMeshAgent.speed=4f;
                     enemyPatrol.navMeshAgent.SetDestination(player.position);
+                    playerAttack.enabled=false;
                     Debug.Log("Detected"); 
                     if (distance < 2f&&!hasAttacked)
                     {
@@ -60,6 +62,7 @@ public class PlayerDetection : MonoBehaviour
         else
         {
             enemyPatrol.navMeshAgent.isStopped=false;
+            playerAttack.enabled=true;
             enemyPatrol.navMeshAgent.speed=2f;
         }
         

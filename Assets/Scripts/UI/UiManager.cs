@@ -11,6 +11,7 @@ public class UiManager : MonoBehaviour
     [SerializeField]private PlayerAttack playerAttack;
     [SerializeField]private CameraMovement cameraMovement;
     [SerializeField]private KeysClaiming keysClaiming;
+    [SerializeField]private PlayerDetection playerDetection;
     [SerializeField]private GameObject mainMenuPanel;
     [SerializeField]private GameObject gameOverPanel;
     [SerializeField]private GameObject gameCompletePanel;
@@ -34,10 +35,10 @@ public class UiManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         playerMovement.enabled=false;
+        playerDetection.enabled=false;
         playerAttack.enabled=false;
         cameraMovement.enabled=false;
         keysClaiming.enabled=false;
-        Time.timeScale=0f;
         playButton.onClick.AddListener(PlayButton);
         restartButton.onClick.AddListener(RestartButton);
         retryButton.onClick.AddListener(RestartButton);
@@ -48,20 +49,22 @@ public class UiManager : MonoBehaviour
     }
     public void ShowGameOver()
     {
-        gameOverPanel.SetActive(true);
         playerMovement.enabled=false;
+        playerDetection.enabled=false;
         playerAttack.enabled=false;
         cameraMovement.enabled=false;
         keysClaiming.enabled=false;
+        gameOverPanel.SetActive(true);
         Cursor.lockState=CursorLockMode.None;
     }
     public void ShowGameComplete()
     {
-        gameCompletePanel.SetActive(true);
         playerMovement.enabled=false;
+        playerDetection.enabled=false;
         playerAttack.enabled=false;
         cameraMovement.enabled=false;
         keysClaiming.enabled=false;
+        gameCompletePanel.SetActive(true);
         Cursor.lockState=CursorLockMode.None;
     }
     public void PlayButton()
@@ -69,6 +72,7 @@ public class UiManager : MonoBehaviour
         mainMenuPanel.SetActive(false);
         playerMovement.enabled=true;
         playerAttack.enabled=true;
+        playerDetection.enabled=true;
         cameraMovement.enabled=true;
         keysClaiming.enabled=true;
         Cursor.lockState=CursorLockMode.Locked;
