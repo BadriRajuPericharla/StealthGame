@@ -7,6 +7,9 @@ public class PlayerDetection : MonoBehaviour
 {
     [SerializeField]private Transform player;
     [SerializeField]private PlayerMovement playerMovement;
+    [SerializeField]private PlayerAttack playerAttack;
+    [SerializeField]private CameraMovement cameraMovement;
+    [SerializeField]private KeysClaiming keysClaiming;
     bool hasAttacked=false;
     EnemyPatrol enemyPatrol;
     EnemyAnimations enemyAnimations;
@@ -41,10 +44,11 @@ public class PlayerDetection : MonoBehaviour
                     {
                         hasAttacked=true;
                         enemyPatrol.navMeshAgent.isStopped=true;
-                        playerMovement.playerAnimations.PlayDeathAnimation();
                         enemyAnimations.PlayAttackAnimation();
-                        playerMovement.enabled=false;
+                        PlayerDie();
+                        StartCoroutine(GameOver());
                         Debug.Log("attack");
+
                     }
                     else
                     {
@@ -62,5 +66,18 @@ public class PlayerDetection : MonoBehaviour
             enemyPatrol.navMeshAgent.speed=2f;
         }
         
+    }
+    public void PlayerDie()
+    {
+        playerMovement.playerAnimations.PlayDeathAnimation();
+        playerMovement.enabled=false;
+        playerAttack.enabled=false;
+        cameraMovement.enabled=false;
+        keysClaiming.enabled=false;
+    }
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(2f);
+        UiManager.instance.ShowGameOver();
     }
 }

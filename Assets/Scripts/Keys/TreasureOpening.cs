@@ -34,9 +34,15 @@ public class TreasureOpening : MonoBehaviour
                 {
                     animator.SetBool("IsOpen",true);
                     pointLight.SetActive(true);
+                    StartCoroutine(GameComplete());
                     Debug.Log("Win");
                 }
             }
         }
+    }
+    IEnumerator GameComplete()
+    {
+        yield return new WaitForSeconds(1.5f);
+        UiManager.instance.ShowGameComplete();
     }
 }
