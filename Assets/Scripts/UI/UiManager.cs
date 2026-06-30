@@ -11,7 +11,7 @@ public class UiManager : MonoBehaviour
     [SerializeField]private PlayerAttack playerAttack;
     [SerializeField]private CameraMovement cameraMovement;
     [SerializeField]private KeysClaiming keysClaiming;
-    [SerializeField]private PlayerDetection playerDetection;
+    [SerializeField]private PlayerDetection[] playerDetection;
     [SerializeField]private GameObject mainMenuPanel;
     [SerializeField]private GameObject gameOverPanel;
     [SerializeField]private GameObject gameCompletePanel;
@@ -35,7 +35,10 @@ public class UiManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         playerMovement.enabled=false;
-        playerDetection.enabled=false;
+        foreach(PlayerDetection enemy in playerDetection)
+        {
+            enemy.enabled=false;
+        }
         playerAttack.enabled=false;
         cameraMovement.enabled=false;
         keysClaiming.enabled=false;
@@ -50,7 +53,10 @@ public class UiManager : MonoBehaviour
     public void ShowGameOver()
     {
         playerMovement.enabled=false;
-        playerDetection.enabled=false;
+        foreach(PlayerDetection enemy in playerDetection)
+        {
+            enemy.enabled=true;
+        }
         playerAttack.enabled=false;
         cameraMovement.enabled=false;
         keysClaiming.enabled=false;
@@ -60,7 +66,10 @@ public class UiManager : MonoBehaviour
     public void ShowGameComplete()
     {
         playerMovement.enabled=false;
-        playerDetection.enabled=false;
+        foreach(PlayerDetection enemy in playerDetection)
+        {
+            enemy.enabled=true;
+        }
         playerAttack.enabled=false;
         cameraMovement.enabled=false;
         keysClaiming.enabled=false;
@@ -72,7 +81,10 @@ public class UiManager : MonoBehaviour
         mainMenuPanel.SetActive(false);
         playerMovement.enabled=true;
         playerAttack.enabled=true;
-        playerDetection.enabled=true;
+        foreach(PlayerDetection enemy in playerDetection)
+        {
+            enemy.enabled=true;
+        }
         cameraMovement.enabled=true;
         keysClaiming.enabled=true;
         Cursor.lockState=CursorLockMode.Locked;

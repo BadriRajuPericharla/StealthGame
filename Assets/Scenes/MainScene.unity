@@ -1347,6 +1347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1905032784}
   playerMovement: {fileID: 1905032786}
+  playerAttack: {fileID: 1905032785}
 --- !u!4 &63247007 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64a8a308f29a2cc4fbb91af1482837dc,
@@ -2039,6 +2040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1905032784}
   playerMovement: {fileID: 1905032786}
+  playerAttack: {fileID: 1905032785}
 --- !u!4 &101377554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64a8a308f29a2cc4fbb91af1482837dc,
@@ -20558,6 +20560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1905032784}
   playerMovement: {fileID: 1905032786}
+  playerAttack: {fileID: 1905032785}
 --- !u!4 &332587621 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64a8a308f29a2cc4fbb91af1482837dc,
@@ -41705,6 +41708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1905032784}
   playerMovement: {fileID: 1905032786}
+  playerAttack: {fileID: 1905032785}
 --- !u!4 &674646749 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64a8a308f29a2cc4fbb91af1482837dc,
@@ -50338,6 +50342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1905032784}
   playerMovement: {fileID: 1905032786}
+  playerAttack: {fileID: 1905032785}
 --- !u!4 &824700257 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64a8a308f29a2cc4fbb91af1482837dc,
@@ -52184,6 +52189,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
         type: 3}
@@ -81413,6 +81423,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
         type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
+        type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -82072,6 +82087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1905032784}
   playerMovement: {fileID: 1905032786}
+  playerAttack: {fileID: 1905032785}
 --- !u!136 &1165448232
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -88714,6 +88730,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
         type: 3}
@@ -105291,6 +105312,14 @@ MonoBehaviour:
   playerAttack: {fileID: 1905032785}
   cameraMovement: {fileID: 661040873}
   keysClaiming: {fileID: 1905032790}
+  playerDetection:
+  - {fileID: 2094268634}
+  - {fileID: 1165448229}
+  - {fileID: 63247005}
+  - {fileID: 674646747}
+  - {fileID: 332587619}
+  - {fileID: 101377552}
+  - {fileID: 824700255}
   mainMenuPanel: {fileID: 766987637}
   gameOverPanel: {fileID: 1878871298}
   gameCompletePanel: {fileID: 1326585333}
@@ -130533,6 +130562,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
         type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
+        type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -139459,6 +139493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ba46114c9547c49953d9476b6867e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canAttack: 0
 --- !u!114 &1905032786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142137,6 +142172,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
         type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
+        type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -142548,6 +142588,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 64a8a308f29a2cc4fbb91af1482837dc,
         type: 3}
@@ -145014,6 +145059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1905032784}
   playerMovement: {fileID: 1905032786}
+  playerAttack: {fileID: 1905032785}
 --- !u!4 &2094268636 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64a8a308f29a2cc4fbb91af1482837dc,

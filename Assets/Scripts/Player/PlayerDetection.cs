@@ -37,7 +37,7 @@ public class PlayerDetection : MonoBehaviour
                     enemyPatrol.navMeshAgent.isStopped=false;
                     enemyPatrol.navMeshAgent.speed=4f;
                     enemyPatrol.navMeshAgent.SetDestination(player.position);
-                    playerAttack.enabled=false;
+                    playerAttack.canAttack=false;
                     Debug.Log("Detected"); 
                     if (distance < 2f&&!hasAttacked)
                     {
@@ -62,7 +62,7 @@ public class PlayerDetection : MonoBehaviour
         else
         {
             enemyPatrol.navMeshAgent.isStopped=false;
-            playerAttack.enabled=true;
+            playerAttack.canAttack=true;
             enemyPatrol.navMeshAgent.speed=2f;
         }
         
