@@ -39,9 +39,16 @@ public class EnemyDie : MonoBehaviour
     {
         enemyAnimations.PlayDeathAnimation();
         SpotLigth.SetActive(false);
-        key.transform.parent=null;
+        if (key != null)
+        {
+            key.transform.parent=null;
+        }
         yield return new WaitForSeconds(2f);
-        key.SetActive(true);
+        if (key != null)
+        {
+            key.SetActive(true);
+        }
+        
         Destroy(gameObject);
     }
 }

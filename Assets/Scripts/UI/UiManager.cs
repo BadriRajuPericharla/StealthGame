@@ -33,6 +33,10 @@ public class UiManager : MonoBehaviour
     void Start()
     {
         mainMenuPanel.SetActive(true);
+        playerMovement.enabled=false;
+        playerAttack.enabled=false;
+        cameraMovement.enabled=false;
+        keysClaiming.enabled=false;
         Time.timeScale=0f;
         playButton.onClick.AddListener(PlayButton);
         restartButton.onClick.AddListener(RestartButton);
@@ -63,6 +67,10 @@ public class UiManager : MonoBehaviour
     public void PlayButton()
     {
         mainMenuPanel.SetActive(false);
+        playerMovement.enabled=true;
+        playerAttack.enabled=true;
+        cameraMovement.enabled=true;
+        keysClaiming.enabled=true;
         Cursor.lockState=CursorLockMode.Locked;
         Time.timeScale=1f;
     }
