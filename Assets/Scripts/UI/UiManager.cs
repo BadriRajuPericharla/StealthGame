@@ -19,12 +19,12 @@ public class UiManager : MonoBehaviour
     [SerializeField]private Button[] exitButton;
     [SerializeField]private Button restartButton;
     [SerializeField]private Button retryButton;
-    public static UiManager instance;
+    public static UiManager Instance;
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance=this;
+            Instance=this;
         }
         else
         {
@@ -35,6 +35,7 @@ public class UiManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         playerMovement.enabled=false;
+        Time.timeScale=0f;
         foreach(PlayerDetection enemy in playerDetection)
         {
             enemy.enabled=false;
@@ -55,7 +56,10 @@ public class UiManager : MonoBehaviour
         playerMovement.enabled=false;
         foreach(PlayerDetection enemy in playerDetection)
         {
-            enemy.enabled=true;
+            if (enemy != null)
+            {
+               enemy.enabled=false; 
+            } 
         }
         playerAttack.enabled=false;
         cameraMovement.enabled=false;
@@ -68,7 +72,10 @@ public class UiManager : MonoBehaviour
         playerMovement.enabled=false;
         foreach(PlayerDetection enemy in playerDetection)
         {
-            enemy.enabled=true;
+            if (enemy != null)
+            {
+                enemy.enabled=false;
+            }
         }
         playerAttack.enabled=false;
         cameraMovement.enabled=false;
@@ -81,6 +88,7 @@ public class UiManager : MonoBehaviour
         mainMenuPanel.SetActive(false);
         playerMovement.enabled=true;
         playerAttack.enabled=true;
+        Time.timeScale=1f;
         foreach(PlayerDetection enemy in playerDetection)
         {
             enemy.enabled=true;
@@ -88,7 +96,6 @@ public class UiManager : MonoBehaviour
         cameraMovement.enabled=true;
         keysClaiming.enabled=true;
         Cursor.lockState=CursorLockMode.Locked;
-        Time.timeScale=1f;
     }
     public void ExitButton()
     {

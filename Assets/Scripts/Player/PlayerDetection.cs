@@ -8,6 +8,7 @@ public class PlayerDetection : MonoBehaviour
     [SerializeField]private Transform player;
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private PlayerAttack playerAttack;
+    bool enemyDetectedPlayer=false;
     bool hasAttacked=false;
     EnemyPatrol enemyPatrol;
     EnemyAnimations enemyAnimations;
@@ -18,6 +19,8 @@ public class PlayerDetection : MonoBehaviour
     }
     void Update()
     {
+        if (!enemyPatrol.navMeshAgent.isActiveAndEnabled)
+            return;
         Vector3 eyeposition=transform.position + Vector3.up*1.5f;
         Vector3 PlayerPosition=player.position+Vector3.up*1f;
 
@@ -33,20 +36,30 @@ public class PlayerDetection : MonoBehaviour
            if(Physics.Raycast(eyeposition,directionToPlayer.normalized,out hit, 8f))
             {
                 if (hit.transform == player)
-                {   
+                {
+                    if (!enemyDetectedPlayer)
+                    {
+                        enemyDetectedPlayer=true;
+                        EnemyManager.Instance.EnemyDetectedPlayer();
+
+                    }
                     enemyPatrol.navMeshAgent.isStopped=false;
                     enemyPatrol.navMeshAgent.speed=4f;
                     enemyPatrol.navMeshAgent.SetDestination(player.position);
-                    playerAttack.canAttack=false;
                     Debug.Log("Detected"); 
-                    if (distance < 2f&&!hasAttacked)
+                    if (distance < 2f)
                     {
-                        hasAttacked=true;
-                        enemyPatrol.navMeshAgent.isStopped=true;
-                        enemyAnimations.PlayAttackAnimation();
-                        playerMovement.playerAnimations.PlayDeathAnimation();
-                        StartCoroutine(GameOver());
-                        Debug.Log("attack");
+                        if (!hasAttacked)
+                        {
+                            hasAttacked=true;
+                            enemyPatrol.navMeshAgent.isStopped=true;
+                            playerAttack.enabled=false;
+                            enemyAnimations.PlayAttackAnimation();
+                            playerMovement.playerAnimations.PlayDeathAnimation();
+                            StartCoroutine(GameOver());
+                            Debug.Log("attack");
+                        }
+                        
 
                     }
                     else
@@ -61,8 +74,12 @@ public class PlayerDetection : MonoBehaviour
         }
         else
         {
+            if (enemyDetectedPlayer)
+            {
+                enemyDetectedPlayer = false;
+                EnemyManager.Instance.EnemyLostPlayer();
+            }
             enemyPatrol.navMeshAgent.isStopped=false;
-            playerAttack.canAttack=true;
             enemyPatrol.navMeshAgent.speed=2f;
         }
         
@@ -70,6 +87,6 @@ public class PlayerDetection : MonoBehaviour
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(2f);
-        UiManager.instance.ShowGameOver();
+        UiManager.Instance.ShowGameOver();
     }
 }

@@ -1294,7 +1294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: {fileID: 1783310328}
   SpotLigth: {fileID: 1462188592}
-  AttackRange: 2
+  AttackRange: 2.5
   PlayerPosition: {fileID: 1905032784}
 --- !u!195 &63247003
 NavMeshAgent:
@@ -1809,6 +1809,51 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 231721866}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &85275416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 85275417}
+  - component: {fileID: 85275418}
+  m_Layer: 0
+  m_Name: EnemyManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &85275417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85275416}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1247.107, y: 696.49023, z: 11.4826975}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &85275418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85275416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84af3323705472840a90cdf189930bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectedEnemies: 0
 --- !u!1001 &92258235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1974,7 +2019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: {fileID: 0}
   SpotLigth: {fileID: 618037070}
-  AttackRange: 2
+  AttackRange: 2.5
   PlayerPosition: {fileID: 1905032784}
 --- !u!195 &101377549
 NavMeshAgent:
@@ -20494,7 +20539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: {fileID: 0}
   SpotLigth: {fileID: 1967861556}
-  AttackRange: 2
+  AttackRange: 2.5
   PlayerPosition: {fileID: 1905032784}
 --- !u!195 &332587616
 NavMeshAgent:
@@ -41165,7 +41210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1905032784}
-  mouseSensitivity: 100
+  mouseSensitivity: 200
 --- !u!1 &663718958
 GameObject:
   m_ObjectHideFlags: 0
@@ -41642,7 +41687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: {fileID: 374289201847086056}
   SpotLigth: {fileID: 1620035786}
-  AttackRange: 2
+  AttackRange: 2.5
   PlayerPosition: {fileID: 1905032784}
 --- !u!195 &674646744
 NavMeshAgent:
@@ -50276,7 +50321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: {fileID: 0}
   SpotLigth: {fileID: 519122066}
-  AttackRange: 2
+  AttackRange: 2.5
   PlayerPosition: {fileID: 1905032784}
 --- !u!195 &824700252
 NavMeshAgent:
@@ -82034,7 +82079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: {fileID: 1312485395}
   SpotLigth: {fileID: 7296694594711879147}
-  AttackRange: 2
+  AttackRange: 2.5
   PlayerPosition: {fileID: 1905032784}
 --- !u!195 &1165448227
 NavMeshAgent:
@@ -139493,7 +139538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ba46114c9547c49953d9476b6867e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canAttack: 0
 --- !u!114 &1905032786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145006,7 +145050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: {fileID: 1648315452}
   SpotLigth: {fileID: 663718958}
-  AttackRange: 2
+  AttackRange: 2.5
   PlayerPosition: {fileID: 1905032784}
 --- !u!195 &2094268632
 NavMeshAgent:
@@ -146599,3 +146643,4 @@ SceneRoots:
   - {fileID: 299475280}
   - {fileID: 1320925395}
   - {fileID: 1524793351}
+  - {fileID: 85275417}

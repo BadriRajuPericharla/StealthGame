@@ -43,6 +43,6 @@ public class TreasureOpening : MonoBehaviour
     IEnumerator GameComplete()
     {
         yield return new WaitForSeconds(1.5f);
-        UiManager.instance.ShowGameComplete();
+        UiManager.Instance.ShowGameComplete();
     }
 }

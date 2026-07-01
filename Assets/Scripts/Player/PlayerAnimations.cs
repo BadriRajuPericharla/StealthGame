@@ -7,12 +7,14 @@ public class PlayerAnimations : MonoBehaviour
 {
     Animator playerAnimator;
     CharacterController characterController;
+    PlayerAttack playerAttack;
     PlayerMovement playerMovement;
     void Start()
     {
         playerAnimator=GetComponent<Animator>();
         characterController=GetComponent<CharacterController>();
         playerMovement=GetComponent<PlayerMovement>();
+        playerAttack=GetComponent<PlayerAttack>();
     }
     public void PlayWalkAnimation()
     {
@@ -31,6 +33,7 @@ public class PlayerAnimations : MonoBehaviour
         playerMovement.enabled=false;
         characterController.enabled=false;
         playerAnimator.applyRootMotion=true;
+        playerAttack.enabled=false;
         playerAnimator.SetTrigger("IsDie");
     }
 }

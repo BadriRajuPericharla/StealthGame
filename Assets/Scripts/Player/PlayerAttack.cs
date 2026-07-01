@@ -5,20 +5,21 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     PlayerMovement player;
-    public bool canAttack;
+    
     void Start()
     {
         player=GetComponent<PlayerMovement>();
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)&&canAttack)
-        {
-            player.playerAnimations.PlayAttackAnimation();
-        }
-        if (!canAttack)
+        if (EnemyManager.Instance.detectedEnemies > 0)
         {
             return;
         }
+        if (Input.GetMouseButtonDown(0) && EnemyManager.Instance.detectedEnemies==0)
+        {
+            player.playerAnimations.PlayAttackAnimation();
+        }
+        
     }
 }
