@@ -30,10 +30,10 @@ public class PlayerAnimations : MonoBehaviour
     }
     public void PlayDeathAnimation()
     {
+        playerAttack.enabled=false;
         playerMovement.enabled=false;
         characterController.enabled=false;
         playerAnimator.applyRootMotion=true;
-        playerAttack.enabled=false;
         playerAnimator.SetTrigger("IsDie");
     }
 }
