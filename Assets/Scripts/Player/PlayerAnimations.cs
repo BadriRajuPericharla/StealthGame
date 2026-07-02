@@ -36,4 +36,24 @@ public class PlayerAnimations : MonoBehaviour
         playerAnimator.applyRootMotion=true;
         playerAnimator.SetTrigger("IsDie");
     }
+    public void PlayWalkLeftAnimation()
+    {
+        playerAnimator.SetBool("LeftWalk",true);
+    }
+    public void StopWalkLeftAnimation()
+    {
+        playerAnimator.SetBool("LeftWalk",false);
+    }
+    public void PlayWalkRightAnimation()
+    {
+        playerAnimator.SetBool("RigthWalk",true);
+    }
+    public void StopWalkRightAnimation()
+    {
+        playerAnimator.SetBool("RigthWalk",false);
+    }
+    public void PlayJumpAnimation()
+    {
+        playerAnimator.SetTrigger("IsJump");
+    }
 }
