@@ -6,7 +6,7 @@ public class TreasureOpening : MonoBehaviour
 {
     public Keys keys;
     public GameObject player;
-    public float ClaimRange=3f;
+    public float ClaimRange=4f;
     public InventoryManager inventoryManager;
     public GameObject pointLight;
     public string[] RequiredKeyNames;

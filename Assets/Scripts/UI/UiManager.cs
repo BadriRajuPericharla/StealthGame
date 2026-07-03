@@ -21,7 +21,7 @@ public class UiManager : MonoBehaviour
     [SerializeField]private Button restartButton;
     [SerializeField]private Button retryButton;
     [SerializeField]private Button inventoryButton;
-    int clickCount=0;
+    bool isInventoryOpen=false;
     public static UiManager Instance;
     void Awake()
     {
@@ -111,25 +111,14 @@ public class UiManager : MonoBehaviour
     }
     public void ShowInventory()
     {
-        inventoryPanel.SetActive(true);
-    }
-    public void CloseInventory()
-    {
-        inventoryPanel.SetActive(false);
+        isInventoryOpen=!isInventoryOpen;
+        inventoryPanel.SetActive(isInventoryOpen);
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            clickCount++;
-            if (clickCount % 2 != 0)
-            {
-                ShowInventory();
-            }
-            else
-            {
-                CloseInventory();
-            }
+            ShowInventory();
             
         }
     }
