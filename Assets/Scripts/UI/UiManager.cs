@@ -15,10 +15,13 @@ public class UiManager : MonoBehaviour
     [SerializeField]private GameObject mainMenuPanel;
     [SerializeField]private GameObject gameOverPanel;
     [SerializeField]private GameObject gameCompletePanel;
+    [SerializeField]private GameObject inventoryPanel;
     [SerializeField]private Button playButton;
     [SerializeField]private Button[] exitButton;
     [SerializeField]private Button restartButton;
     [SerializeField]private Button retryButton;
+    [SerializeField]private Button inventoryButton;
+    int clickCount=0;
     public static UiManager Instance;
     void Awake()
     {
@@ -46,6 +49,7 @@ public class UiManager : MonoBehaviour
         playButton.onClick.AddListener(PlayButton);
         restartButton.onClick.AddListener(RestartButton);
         retryButton.onClick.AddListener(RestartButton);
+        inventoryButton.onClick.AddListener(ShowInventory);
         foreach (Button button in exitButton)
         {
             button.onClick.AddListener(ExitButton);
@@ -104,5 +108,29 @@ public class UiManager : MonoBehaviour
     public void RestartButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void ShowInventory()
+    {
+        inventoryPanel.SetActive(true);
+    }
+    public void CloseInventory()
+    {
+        inventoryPanel.SetActive(false);
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            clickCount++;
+            if (clickCount % 2 != 0)
+            {
+                ShowInventory();
+            }
+            else
+            {
+                CloseInventory();
+            }
+            
+        }
     }
 }

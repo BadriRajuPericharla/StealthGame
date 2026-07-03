@@ -41,29 +41,13 @@ public class PlayerMovement : MonoBehaviour
         movement*=speed;
         movement.y=yvelocity;
         controller.Move(movement*Time.deltaTime);
-        if(Mathf.Abs(vertical)>0.1f)
+        if(Mathf.Abs(vertical)>0.1f|| MathF.Abs(horizontal)>0.01f)
         {
             playerAnimations.PlayWalkAnimation();
         }
         else
         {
             playerAnimations.StopWalkAnimation();
-        }
-        if(horizontal<0)
-        {
-            playerAnimations.PlayWalkLeftAnimation();
-        }
-        else
-        {
-            playerAnimations.StopWalkLeftAnimation();
-        }
-        if (horizontal > 0)
-        {
-            playerAnimations.PlayWalkRightAnimation();
-        }
-        else
-        {
-            playerAnimations.StopWalkRightAnimation();
         }
     }
     

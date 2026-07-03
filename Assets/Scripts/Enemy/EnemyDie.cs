@@ -30,7 +30,7 @@ public class EnemyDie : MonoBehaviour
         {
             isDead=true;
             enemyAnimations.enemyAnimator.applyRootMotion=true;
-            capsuleCollider.enabled=false;
+            
             navMeshAgent.enabled=false;
             playerDetection.enabled=false;
             StartCoroutine(Death());
@@ -41,11 +41,13 @@ public class EnemyDie : MonoBehaviour
     {
         enemyAnimations.PlayDeathAnimation();
         SpotLigth.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        capsuleCollider.enabled=false;
         if (key != null)
         {
             key.transform.parent=null;
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         if (key != null)
         {
             key.SetActive(true);
