@@ -12,14 +12,20 @@ public class PlayerAttack : MonoBehaviour
     }
     void Update()
     {
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            Attack();
+        }
+        
+    }
+    public void Attack()
+    {
         if (EnemyManager.Instance.detectedEnemies > 0)
         {
             return;
         }
-        if (Input.GetMouseButtonDown(0) && EnemyManager.Instance.detectedEnemies==0)
-        {
-            player.playerAnimations.PlayAttackAnimation();
-        }
+        player.playerAnimations.PlayAttackAnimation();
         
     }
 }
