@@ -8,5 +8,6 @@ public class Keys : ScriptableObject
     public GameObject[] DoorKeyPrefab;
     public string[] TreasureKeyName;
     public GameObject[] TreasureKeyPrefab;
+    
 
 }

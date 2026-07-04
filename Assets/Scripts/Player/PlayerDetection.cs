@@ -9,17 +9,17 @@ public class PlayerDetection : MonoBehaviour
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private PlayerAttack playerAttack;
     bool enemyDetectedPlayer=false;
+    NavMeshAgent navMeshAgent;
     bool hasAttacked=false;
-    EnemyPatrol enemyPatrol;
     EnemyAnimations enemyAnimations;
     void Start()
     {
-        enemyPatrol=GetComponent<EnemyPatrol>();
+        navMeshAgent=GetComponent<NavMeshAgent>();
         enemyAnimations=GetComponent<EnemyAnimations>();
     }
     void Update()
     {
-        if (!enemyPatrol.navMeshAgent.isActiveAndEnabled)
+        if (!navMeshAgent.isActiveAndEnabled)
             return;
         Vector3 eyeposition=transform.position + Vector3.up*1.5f;
         Vector3 PlayerPosition=player.position+Vector3.up*1f;
@@ -43,16 +43,16 @@ public class PlayerDetection : MonoBehaviour
                         EnemyManager.Instance.EnemyDetectedPlayer();
 
                     }
-                    enemyPatrol.navMeshAgent.isStopped=false;
-                    enemyPatrol.navMeshAgent.speed=4f;
-                    enemyPatrol.navMeshAgent.SetDestination(player.position);
+                    navMeshAgent.isStopped=false;
+                    navMeshAgent.speed=4f;
+                    navMeshAgent.SetDestination(player.position);
                     Debug.Log("Detected"); 
                     if (distance < 2f)
                     {
                         if (!hasAttacked)
                         {
                             hasAttacked=true;
-                            enemyPatrol.navMeshAgent.isStopped=true;
+                            navMeshAgent.isStopped=true;
                             playerAttack.enabled=false;
                             enemyAnimations.PlayAttackAnimation();
                             playerMovement.playerAnimations.PlayDeathAnimation();
@@ -64,7 +64,7 @@ public class PlayerDetection : MonoBehaviour
                     }
                     else
                     {
-                        enemyPatrol.navMeshAgent.isStopped=false;
+                        navMeshAgent.isStopped=false;
                     }
             
                 }
@@ -79,8 +79,8 @@ public class PlayerDetection : MonoBehaviour
                 enemyDetectedPlayer = false;
                 EnemyManager.Instance.EnemyLostPlayer();
             }
-            enemyPatrol.navMeshAgent.isStopped=false;
-            enemyPatrol.navMeshAgent.speed=2f;
+            navMeshAgent.isStopped=false;
+            navMeshAgent.speed=2f;
         }
         
     }

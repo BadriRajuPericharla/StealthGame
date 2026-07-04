@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,14 +16,22 @@ public class UiManager : MonoBehaviour
     [SerializeField]private GameObject mainMenuPanel;
     [SerializeField]private GameObject gameOverPanel;
     [SerializeField]private GameObject gameCompletePanel;
+    [SerializeField]private GameObject levelsPanel;
     [SerializeField]private GameObject inventoryPanel;
     [SerializeField]private Button playButton;
     [SerializeField]private Button[] exitButton;
     [SerializeField]private Button restartButton;
     [SerializeField]private Button retryButton;
     [SerializeField]private Button inventoryButton;
+    [SerializeField]private Button practiceButton;
+    [SerializeField]private Button easyButton;
+    [SerializeField]private Button hardButton;
+    [SerializeField]private EnemyPatrol[] enemyPatrol;
+    [SerializeField]private RandomPatrol[] randomPatrols;
+    [SerializeField]private GameObject[] doorKeys;
     bool isInventoryOpen=false;
     public static UiManager Instance;
+    public static bool isRetry=false;
     void Awake()
     {
         if (Instance == null)
@@ -36,24 +45,55 @@ public class UiManager : MonoBehaviour
     }
     void Start()
     {
-        mainMenuPanel.SetActive(true);
-        playerMovement.enabled=false;
-        Time.timeScale=0f;
-        foreach(PlayerDetection enemy in playerDetection)
+        if (!isRetry)
         {
-            enemy.enabled=false;
+            mainMenuPanel.SetActive(true);
+            playerMovement.enabled=false;
+            Time.timeScale=0f;
+            foreach(PlayerDetection enemy in playerDetection)
+            {
+                enemy.enabled=false;
+            }
+            playerAttack.enabled=false;
+            cameraMovement.enabled=false;
+            keysClaiming.enabled=false;
+            playButton.onClick.AddListener(PlayButton);
+            restartButton.onClick.AddListener(RestartButton);
+            retryButton.onClick.AddListener(RetryButton);
+            inventoryButton.onClick.AddListener(ShowInventory);
+            practiceButton.onClick.AddListener(PracticeButton);
+            easyButton.onClick.AddListener(EasyButton);
+            hardButton.onClick.AddListener(HardButton);
+            foreach (Button button in exitButton)
+            {
+                button.onClick.AddListener(ExitButton);
+            }
         }
-        playerAttack.enabled=false;
-        cameraMovement.enabled=false;
-        keysClaiming.enabled=false;
-        playButton.onClick.AddListener(PlayButton);
-        restartButton.onClick.AddListener(RestartButton);
-        retryButton.onClick.AddListener(RestartButton);
-        inventoryButton.onClick.AddListener(ShowInventory);
-        foreach (Button button in exitButton)
+        else
         {
-            button.onClick.AddListener(ExitButton);
+            mainMenuPanel.SetActive(false);
+            playerMovement.enabled=true;
+            Time.timeScale=1f;
+            foreach(PlayerDetection enemy in playerDetection)
+            {
+                enemy.enabled=true;
+            }
+            playerAttack.enabled=true;
+            cameraMovement.enabled=true;
+            keysClaiming.enabled=true;
+            playButton.onClick.AddListener(PlayButton);
+            restartButton.onClick.AddListener(RestartButton);
+            retryButton.onClick.AddListener(RetryButton);
+            inventoryButton.onClick.AddListener(ShowInventory);
+            practiceButton.onClick.AddListener(PracticeButton);
+            easyButton.onClick.AddListener(EasyButton);
+            hardButton.onClick.AddListener(HardButton);
+            foreach (Button button in exitButton)
+            {
+                button.onClick.AddListener(ExitButton);
+            }
         }
+        
     }
     public void ShowGameOver()
     {
@@ -90,16 +130,7 @@ public class UiManager : MonoBehaviour
     public void PlayButton()
     {
         mainMenuPanel.SetActive(false);
-        playerMovement.enabled=true;
-        playerAttack.enabled=true;
-        Time.timeScale=1f;
-        foreach(PlayerDetection enemy in playerDetection)
-        {
-            enemy.enabled=true;
-        }
-        cameraMovement.enabled=true;
-        keysClaiming.enabled=true;
-        Cursor.lockState=CursorLockMode.Locked;
+        levelsPanel.SetActive(true);  
     }
     public void ExitButton()
     {
@@ -109,10 +140,78 @@ public class UiManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    public void RetryButton()
+    {
+         isRetry=true;
+         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     public void ShowInventory()
     {
         isInventoryOpen=!isInventoryOpen;
         inventoryPanel.SetActive(isInventoryOpen);
+    }
+    public void ShowLevelsPanel()
+    {
+        levelsPanel.SetActive(true);
+        Cursor.lockState=CursorLockMode.None;
+    }
+    public void PracticeButton()
+    {
+        levelsPanel.SetActive(false);
+        for(int i=0; i < enemyPatrol.Length; i++)
+        {
+            enemyPatrol[i].gameObject.SetActive(false);
+        }
+        for(int j = 0; j < randomPatrols.Length; j++)
+        {
+            randomPatrols[j].gameObject.SetActive(false);
+        }
+        for(int k = 0; k < doorKeys.Length; k++)
+        {
+            doorKeys[k].gameObject.SetActive(true);
+        }
+        Cursor.lockState=CursorLockMode.Locked;
+        playerMovement.enabled=true;
+        playerAttack.enabled=true;
+        Time.timeScale=1f;
+        foreach(PlayerDetection enemy in playerDetection)
+        {
+            enemy.enabled=true;
+        }
+        cameraMovement.enabled=true;
+        keysClaiming.enabled=true;
+    }
+    public void EasyButton()
+    {
+        levelsPanel.SetActive(false);
+        Cursor.lockState=CursorLockMode.Locked;
+        playerMovement.enabled=true;
+        playerAttack.enabled=true;
+        Time.timeScale=1f;
+        for(int j = 0; j < randomPatrols.Length; j++)
+        {
+            randomPatrols[j].gameObject.SetActive(false);
+        }
+        foreach(PlayerDetection enemy in playerDetection)
+        {
+            enemy.enabled=true;
+        }
+        cameraMovement.enabled=true;
+        keysClaiming.enabled=true;
+    }
+    public void HardButton()
+    {
+        levelsPanel.SetActive(false);
+        Cursor.lockState=CursorLockMode.Locked;
+        playerMovement.enabled=true;
+        playerAttack.enabled=true;
+        Time.timeScale=1f;
+        foreach(PlayerDetection enemy in playerDetection)
+        {
+            enemy.enabled=true;
+        }
+        cameraMovement.enabled=true;
+        keysClaiming.enabled=true;
     }
     void Update()
     {
