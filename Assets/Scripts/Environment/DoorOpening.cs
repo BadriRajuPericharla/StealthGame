@@ -8,7 +8,7 @@ public class DoorOpening : MonoBehaviour
     public Transform player;
     public InventoryManager inventory;
     public string RequiredKey;
-    MessageText messageText;
+    [SerializeField]private MessageText messageText;
     private bool isOpenDoor1 = false;
     bool hasOpened1=false;
     
@@ -23,7 +23,7 @@ public class DoorOpening : MonoBehaviour
             Invoke("stopdoor",1f);
             
         }
-        if(Input.GetKeyDown(KeyCode.R)&& !inventory.HasDoorKey(RequiredKey))
+        if(Input.GetKeyDown(KeyCode.R) && !inventory.HasDoorKey(RequiredKey) && distance<5f)
         {
             messageText.KeyCollectMessage();
         }
