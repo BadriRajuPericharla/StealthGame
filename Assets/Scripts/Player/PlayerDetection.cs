@@ -8,6 +8,7 @@ public class PlayerDetection : MonoBehaviour
     [SerializeField]private Transform player;
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private PlayerAttack playerAttack;
+    [SerializeField]private GameObject deathCam;
     bool enemyDetectedPlayer=false;
     NavMeshAgent navMeshAgent;
     bool hasAttacked=false;
@@ -55,6 +56,7 @@ public class PlayerDetection : MonoBehaviour
                             navMeshAgent.isStopped=true;
                             playerAttack.enabled=false;
                             enemyAnimations.PlayAttackAnimation();
+                            deathCam.SetActive(true);
                             playerMovement.playerAnimations.PlayDeathAnimation();
                             StartCoroutine(GameOver());
                             Debug.Log("attack");
