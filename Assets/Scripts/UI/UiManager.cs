@@ -11,7 +11,7 @@ public class UiManager : MonoBehaviour
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private PlayerAttack playerAttack;
     [SerializeField]private CameraMovement cameraMovement;
-    [SerializeField]private KeysClaiming keysClaiming;
+    [SerializeField]private PlayerInteraction playerInteraction;
     [SerializeField]private PlayerDetection[] playerDetection;
     [SerializeField]private GameObject mainMenuPanel;
     [SerializeField]private GameObject gameOverPanel;
@@ -56,7 +56,7 @@ public class UiManager : MonoBehaviour
             }
             playerAttack.enabled=false;
             cameraMovement.enabled=false;
-            keysClaiming.enabled=false;
+            playerInteraction.enabled=false;
             playButton.onClick.AddListener(PlayButton);
             restartButton.onClick.AddListener(RestartButton);
             retryButton.onClick.AddListener(RetryButton);
@@ -80,7 +80,7 @@ public class UiManager : MonoBehaviour
             }
             playerAttack.enabled=true;
             cameraMovement.enabled=true;
-            keysClaiming.enabled=true;
+            playerInteraction.enabled=true;
             playButton.onClick.AddListener(PlayButton);
             restartButton.onClick.AddListener(RestartButton);
             retryButton.onClick.AddListener(RetryButton);
@@ -107,7 +107,7 @@ public class UiManager : MonoBehaviour
         }
         playerAttack.enabled=false;
         cameraMovement.enabled=false;
-        keysClaiming.enabled=false;
+        playerInteraction.enabled=false;
         gameOverPanel.SetActive(true);
         Cursor.lockState=CursorLockMode.None;
     }
@@ -123,7 +123,7 @@ public class UiManager : MonoBehaviour
         }
         playerAttack.enabled=false;
         cameraMovement.enabled=false;
-        keysClaiming.enabled=false;
+        playerInteraction.enabled=false;
         gameCompletePanel.SetActive(true);
         Cursor.lockState=CursorLockMode.None;
     }
@@ -179,7 +179,7 @@ public class UiManager : MonoBehaviour
             enemy.enabled=true;
         }
         cameraMovement.enabled=true;
-        keysClaiming.enabled=true;
+        playerInteraction.enabled=true;
     }
     public void EasyButton()
     {
@@ -197,7 +197,7 @@ public class UiManager : MonoBehaviour
             enemy.enabled=true;
         }
         cameraMovement.enabled=true;
-        keysClaiming.enabled=true;
+        playerInteraction.enabled=true;
     }
     public void HardButton()
     {
@@ -211,7 +211,7 @@ public class UiManager : MonoBehaviour
             enemy.enabled=true;
         }
         cameraMovement.enabled=true;
-        keysClaiming.enabled=true;
+        playerInteraction.enabled=true;
     }
     void Update()
     {

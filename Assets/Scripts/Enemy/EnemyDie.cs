@@ -9,6 +9,7 @@ public class EnemyDie : MonoBehaviour
 {
     public GameObject key;
     public GameObject SpotLigth;
+    public PlayerInteraction playerInteraction;
     EnemyAnimations enemyAnimations;
     CapsuleCollider capsuleCollider;
     NavMeshAgent navMeshAgent;
@@ -26,8 +27,9 @@ public class EnemyDie : MonoBehaviour
     void Update()
     {
         float distance=Vector3.Distance(transform.position,PlayerPosition.transform.position);
-        if(!isDead && distance<AttackRange && Input.GetMouseButtonDown(0)&&EnemyManager.Instance.detectedEnemies==0)
+        if(!isDead && distance<AttackRange &&EnemyManager.Instance.detectedEnemies==0&& playerInteraction.enemyDetected)
         {
+            playerInteraction.enemyDetected=false;
             isDead=true;
             enemyAnimations.enemyAnimator.applyRootMotion=true;
             

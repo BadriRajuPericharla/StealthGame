@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TreasureOpening : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class TreasureOpening : MonoBehaviour
     public float ClaimRange=4f;
     public InventoryManager inventoryManager;
     public GameObject pointLight;
+    public PlayerInteraction playerInteraction;
     public string[] RequiredKeyNames;
     bool allKeysCollected;
     Animator animator;
@@ -19,7 +21,7 @@ public class TreasureOpening : MonoBehaviour
     void Update()
     {
         float distance=Vector3.Distance(transform.position,player.transform.position);
-        if (Input.GetKeyDown(KeyCode.E) && distance<ClaimRange)
+        if (distance<ClaimRange && playerInteraction.canOpenTreasure)
         {
             allKeysCollected=true;
             for(int i = 0; i < RequiredKeyNames.Length; i++)
@@ -30,14 +32,15 @@ public class TreasureOpening : MonoBehaviour
                     allKeysCollected=false;
                     break;
                 }
-                if (allKeysCollected)
-                {
-                    animator.SetBool("IsOpen",true);
-                    pointLight.SetActive(true);
-                    StartCoroutine(GameComplete());
-                    Debug.Log("Win");
-                }
             }
+            if (allKeysCollected)
+            {
+                animator.SetBool("IsOpen",true);
+                pointLight.SetActive(true);
+                StartCoroutine(GameComplete());
+                Debug.Log("Win");
+            }
+            
         }
     }
     IEnumerator GameComplete()
