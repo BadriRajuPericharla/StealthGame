@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5634532462982891454}
   - component: {fileID: 2093443782267337543}
   - component: {fileID: 6234310587994105102}
-  - component: {fileID: 4097195505043946274}
+  - component: {fileID: 8281581931626035564}
   m_Layer: 0
   m_Name: Key-2
   m_TagString: DoorKey
@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62127e9c750c46740b2c9254fd073761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &4097195505043946274
-MeshCollider:
+--- !u!65 &8281581931626035564
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -116,10 +116,9 @@ MeshCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1215533875317036940, guid: 0669f3d8f4b119f418a4bbe061cc198f, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.16938813, y: 0.09675571, z: 0.29061165}
+  m_Center: {x: -0.007913597, y: 0.0016189899, z: -0.0026355684}
 --- !u!1 &4328735138747855669
 GameObject:
   m_ObjectHideFlags: 0
