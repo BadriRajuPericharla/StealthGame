@@ -36,8 +36,8 @@ public class PlayerAnimations : MonoBehaviour
         playerAnimator.applyRootMotion=true;
         playerAnimator.SetTrigger("IsDie");
     }
-    public void PlayJumpAnimation()
-    {
-        playerAnimator.SetTrigger("IsJump");
-    }
+    // public void PlayJumpAnimation()
+    // {
+    //     playerAnimator.SetTrigger("IsJump");
+    // }
 }
