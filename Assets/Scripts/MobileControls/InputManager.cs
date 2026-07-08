@@ -8,6 +8,9 @@ public class InputManager : MonoBehaviour
     public static float Vertical;
     public static float LookX;
     public static float LookY;
+    public static bool interact;
+    public static bool attack;
+    public static bool doorOpen;
 
     [SerializeField] private VariableJoystick joystick;
     [SerializeField] private float touchSensitivity = 5f;
@@ -15,11 +18,34 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            interact=true;
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            interact=true;
+        }
+        if (!Application.isMobilePlatform)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                attack=true;
+            }
+        }
+        if (!Application.isMobilePlatform)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                doorOpen=true;
+            }
+        }
+        
+        
         if (Application.isMobilePlatform)
         {
             Horizontal = joystick.Horizontal;
             Vertical = joystick.Vertical;
-
             LookX = TouchLook.lookInput.x * touchSensitivity * Time.deltaTime;
             LookY = TouchLook.lookInput.y * touchSensitivity * Time.deltaTime;
         }
@@ -27,10 +53,27 @@ public class InputManager : MonoBehaviour
         {
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
-
             LookX = Input.GetAxis("Mouse X")* mouseSensitivity * Time.deltaTime;
             LookY = Input.GetAxis("Mouse Y")* mouseSensitivity * Time.deltaTime;
         }
+    }
+    public void mobileInteract()
+    {
+        interact=true;
+    }
+    public void mobileAttack()
+    {
+        attack=true;
+    }
+    public void DoorOpen()
+    {
+        doorOpen=true;
+    }
+    void LateUpdate()
+    {
+        interact=false;
+        attack=false;
+        doorOpen=false;
     }
 }
 

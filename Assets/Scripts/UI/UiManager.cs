@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Claims;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -12,12 +13,14 @@ public class UiManager : MonoBehaviour
     [SerializeField]private PlayerAttack playerAttack;
     [SerializeField]private CameraMovement cameraMovement;
     [SerializeField]private PlayerInteraction playerInteraction;
+    [SerializeField]private InputManager inputManager;
     [SerializeField]private PlayerDetection[] playerDetection;
     [SerializeField]private GameObject mainMenuPanel;
     [SerializeField]private GameObject gameOverPanel;
     [SerializeField]private GameObject gameCompletePanel;
     [SerializeField]private GameObject levelsPanel;
     [SerializeField]private GameObject inventoryPanel;
+    [SerializeField]private GameObject mobileControlsPanel;
     [SerializeField]private Button playButton;
     [SerializeField]private Button[] exitButton;
     [SerializeField]private Button restartButton;
@@ -26,10 +29,15 @@ public class UiManager : MonoBehaviour
     [SerializeField]private Button practiceButton;
     [SerializeField]private Button easyButton;
     [SerializeField]private Button hardButton;
+    [SerializeField]private Button attackButton;
+    [SerializeField]private Button claim;
+    [SerializeField]private Button doorOpen;
+    [SerializeField]private GameObject doorOpenButton;
+    [SerializeField]private GameObject claimButton;
     [SerializeField]private EnemyPatrol[] enemyPatrol;
     [SerializeField]private RandomPatrol[] randomPatrols;
     [SerializeField]private GameObject[] doorKeys;
-    [SerializeField]private GameObject mobileControlsPanel;
+    
     bool isInventoryOpen=false;
     public static UiManager Instance;
     public static bool isRetry=false;
@@ -65,6 +73,9 @@ public class UiManager : MonoBehaviour
             practiceButton.onClick.AddListener(PracticeButton);
             easyButton.onClick.AddListener(EasyButton);
             hardButton.onClick.AddListener(HardButton);
+            attackButton.onClick.AddListener(inputManager.mobileAttack);
+            claim.onClick.AddListener(inputManager.mobileInteract);
+            doorOpen.onClick.AddListener(inputManager.DoorOpen);
             foreach (Button button in exitButton)
             {
                 button.onClick.AddListener(ExitButton);
@@ -89,6 +100,9 @@ public class UiManager : MonoBehaviour
             practiceButton.onClick.AddListener(PracticeButton);
             easyButton.onClick.AddListener(EasyButton);
             hardButton.onClick.AddListener(HardButton);
+            attackButton.onClick.AddListener(inputManager.mobileAttack);
+            claim.onClick.AddListener(inputManager.mobileInteract);
+            doorOpen.onClick.AddListener(inputManager.DoorOpen);
             foreach (Button button in exitButton)
             {
                 button.onClick.AddListener(ExitButton);
@@ -158,6 +172,10 @@ public class UiManager : MonoBehaviour
     }
     public void PracticeButton()
     {
+        if (Application.isMobilePlatform)
+        {
+            ShowMobileControls();
+        }
         levelsPanel.SetActive(false);
         for(int i=0; i < enemyPatrol.Length; i++)
         {
@@ -172,10 +190,6 @@ public class UiManager : MonoBehaviour
             doorKeys[k].gameObject.SetActive(true);
         }
         Cursor.lockState=CursorLockMode.None;
-        if (Application.isMobilePlatform)
-        {
-            mobileControlsPanel.SetActive(true);
-        }
         playerMovement.enabled=true;
         playerAttack.enabled=true;
         Time.timeScale=1f;
@@ -189,6 +203,10 @@ public class UiManager : MonoBehaviour
     }
     public void EasyButton()
     {
+        if (Application.isMobilePlatform)
+        {
+            ShowMobileControls();
+        }
         levelsPanel.SetActive(false);
         Cursor.lockState=CursorLockMode.Locked;
         playerMovement.enabled=true;
@@ -207,6 +225,10 @@ public class UiManager : MonoBehaviour
     }
     public void HardButton()
     {
+        if (Application.isMobilePlatform)
+        {
+            ShowMobileControls();
+        }
         levelsPanel.SetActive(false);
         Cursor.lockState=CursorLockMode.Locked;
         playerMovement.enabled=true;
@@ -218,6 +240,26 @@ public class UiManager : MonoBehaviour
         }
         cameraMovement.enabled=true;
         playerInteraction.enabled=true;
+    }
+    public void ShowMobileControls()
+    {
+        mobileControlsPanel.SetActive(true);
+    }
+    public void ShowClaimButton()
+    {
+        claimButton.SetActive(true);
+    }
+    public void CloseCliamButton()
+    {
+        claimButton.SetActive(false);
+    }
+    public void ShowDoorOpenButton()
+    {
+        doorOpenButton.SetActive(true);
+    }
+    public void CloseDoorOpenButton()
+    {
+        doorOpenButton.SetActive(false);
     }
     void Update()
     {

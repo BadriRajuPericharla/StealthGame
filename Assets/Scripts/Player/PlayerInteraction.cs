@@ -21,51 +21,72 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, claimDistance,layerMask))
         {
+            if (true)
+            {
+                if (hit.collider.CompareTag("DoorKey") || hit.collider.CompareTag("TreasureKey")||hit.collider.CompareTag("TreasureChest"))
+                {
+                    UiManager.Instance.ShowClaimButton();
+                }
+                else
+                {
+                    UiManager.Instance.CloseCliamButton();
+                }
+                
+            }
             
             Debug.Log("Touched: " + hit.collider.name);
-            if (hit.collider.CompareTag("DoorKey")&&Input.GetKeyDown(KeyCode.C))
-            {
-                // Pick up the door key
+
+            KeysClaimimg();
+        }
+        else if(true)
+        {
+            UiManager.Instance.CloseCliamButton();
+        }
+    }
+    public void KeysClaimimg()
+    {
+        if (hit.collider.CompareTag("DoorKey")&&InputManager.interact)
+        {
+
                 
-                for(int i = 0; i < keys.DoorKeyPrefab.Length; i++)
+            for(int i = 0; i < keys.DoorKeyPrefab.Length; i++)
+            {
+                if (hit.collider.gameObject.name.Contains(keys.DoorKeyPrefab[i].name))
                 {
-                    if (hit.collider.gameObject.name.Contains(keys.DoorKeyPrefab[i].name))
-                    {
-                        inventory.AddDoorKey(keys.DoorKeyName[i]);
-                        Color color=inventoryKeys.doorKeys[i].color;
-                        color.a=1;
-                        inventoryKeys.doorKeys[i].color=color;
-                        hit.collider.gameObject.SetActive(false);
-                        break;
-                    }
+                    inventory.AddDoorKey(keys.DoorKeyName[i]);
+                    Color color=inventoryKeys.doorKeys[i].color;
+                    color.a=1;
+                    inventoryKeys.doorKeys[i].color=color;
+                    hit.collider.gameObject.SetActive(false);
+                    break;
                 }
-                }
-            else if (hit.collider.CompareTag("TreasureKey")&&Input.GetKeyDown(KeyCode.C))
-            {
-                for(int i = 0; i < keys.TreasureKeyPrefab.Length; i++)
-                {
-                    if (hit.collider.gameObject.name.Contains(keys.TreasureKeyPrefab[i].name))
-                    {
-                        inventory.AddTreasureKey(keys.TreasureKeyName[i]);
-                        Color color=inventoryKeys.treasureKeys[i].color;
-                        color.a=1;
-                        inventoryKeys.treasureKeys[i].color=color;
-                        hit.collider.gameObject.SetActive(false);
-                        break;
-                    }
-                }
-            }
-            else if (hit.collider.CompareTag("TreasureChest") && Input.GetKeyDown(KeyCode.E))
-            {
-                canOpenTreasure=true;
-            }
-            else if (hit.collider.CompareTag("Enemy") && Input.GetMouseButtonDown(0))
-            {
-                enemyDetected=true;
             }
         }
-    
-
+        else if (hit.collider.CompareTag("TreasureKey")&&InputManager.interact)
+        {
+            for(int i = 0; i < keys.TreasureKeyPrefab.Length; i++)
+            {
+                if (hit.collider.gameObject.name.Contains(keys.TreasureKeyPrefab[i].name))
+                {
+                    inventory.AddTreasureKey(keys.TreasureKeyName[i]);
+                    Color color=inventoryKeys.treasureKeys[i].color;
+                    color.a=1;
+                    inventoryKeys.treasureKeys[i].color=color;
+                    hit.collider.gameObject.SetActive(false);
+                    break;
+                }
+            }
+        }
+        else if (hit.collider.CompareTag("TreasureChest") && InputManager.interact)
+        {
+            canOpenTreasure=true;
+        }
+        else if (hit.collider.CompareTag("Enemy") && InputManager.interact)
+        {
+            enemyDetected=true;
+        }
+        // else if(hit.collider.CompareTag("Door"))
     }
-
 }
+
+

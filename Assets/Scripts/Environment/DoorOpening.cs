@@ -16,14 +16,14 @@ public class DoorOpening : MonoBehaviour
     void Update()
     {
         float distance=Vector3.Distance(transform.position,player.transform.position);
-        if(Input.GetKeyDown(KeyCode.R)  && !hasOpened1 && inventory.HasDoorKey(RequiredKey) && distance<5f)
+        if(InputManager.doorOpen  && !hasOpened1 && inventory.HasDoorKey(RequiredKey) && distance<5f)
         {
             isOpenDoor1 = true;
             hasOpened1=true;
             Invoke("stopdoor",1f);
             
         }
-        if(Input.GetKeyDown(KeyCode.R) && !inventory.HasDoorKey(RequiredKey) && distance<5f)
+        if(InputManager.doorOpen && !inventory.HasDoorKey(RequiredKey) && distance<5f)
         {
             messageText.KeyCollectMessage();
         }
