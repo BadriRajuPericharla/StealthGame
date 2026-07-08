@@ -8,6 +8,7 @@ TagManager:
   - DoorKey
   - TreasureKey
   - TreasureChest
+  - Door
   layers:
   - Default
   - TransparentFX

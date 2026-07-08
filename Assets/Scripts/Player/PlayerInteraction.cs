@@ -14,6 +14,7 @@ public class PlayerInteraction : MonoBehaviour
     public RaycastHit hit;
     public bool canOpenTreasure=false;
     public bool enemyDetected=false;
+    public static bool canOpenDoor=false;
     void Update()
     {
         int layerMask=~ LayerMask.GetMask("Player");
@@ -21,14 +22,19 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, claimDistance,layerMask))
         {
-            if (true)
+            if (Application.isMobilePlatform)
             {
                 if (hit.collider.CompareTag("DoorKey") || hit.collider.CompareTag("TreasureKey")||hit.collider.CompareTag("TreasureChest"))
                 {
                     UiManager.Instance.ShowClaimButton();
                 }
+                else if (hit.collider.CompareTag("Door"))
+                {
+                    UiManager.Instance.ShowDoorOpenButton();
+                }
                 else
                 {
+                    UiManager.Instance.CloseDoorOpenButton();
                     UiManager.Instance.CloseCliamButton();
                 }
                 
@@ -38,9 +44,10 @@ public class PlayerInteraction : MonoBehaviour
 
             KeysClaimimg();
         }
-        else if(true)
+        else if(Application.isMobilePlatform)
         {
             UiManager.Instance.CloseCliamButton();
+            UiManager.Instance.CloseDoorOpenButton();
         }
     }
     public void KeysClaimimg()
@@ -85,7 +92,10 @@ public class PlayerInteraction : MonoBehaviour
         {
             enemyDetected=true;
         }
-        // else if(hit.collider.CompareTag("Door"))
+        else if(hit.collider.CompareTag("Door") && InputManager.doorOpen)
+        {
+            canOpenDoor=true;
+        }
     }
 }
 
