@@ -29,6 +29,7 @@ public class UiManager : MonoBehaviour
     [SerializeField]private EnemyPatrol[] enemyPatrol;
     [SerializeField]private RandomPatrol[] randomPatrols;
     [SerializeField]private GameObject[] doorKeys;
+    [SerializeField]private GameObject mobileControlsPanel;
     bool isInventoryOpen=false;
     public static UiManager Instance;
     public static bool isRetry=false;
@@ -170,7 +171,11 @@ public class UiManager : MonoBehaviour
         {
             doorKeys[k].gameObject.SetActive(true);
         }
-        Cursor.lockState=CursorLockMode.Locked;
+        Cursor.lockState=CursorLockMode.None;
+        if (Application.isMobilePlatform)
+        {
+            mobileControlsPanel.SetActive(true);
+        }
         playerMovement.enabled=true;
         playerAttack.enabled=true;
         Time.timeScale=1f;
@@ -180,6 +185,7 @@ public class UiManager : MonoBehaviour
         }
         cameraMovement.enabled=true;
         playerInteraction.enabled=true;
+
     }
     public void EasyButton()
     {
