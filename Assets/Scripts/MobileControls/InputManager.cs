@@ -44,6 +44,7 @@ public class InputManager : MonoBehaviour
         
         if (Application.isMobilePlatform)
         {
+            UiManager.Instance.ShowMobileControls();
             Horizontal = joystick.Horizontal;
             Vertical = joystick.Vertical;
             LookX = TouchLook.lookInput.x * touchSensitivity * Time.deltaTime;
@@ -51,6 +52,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
+            UiManager.Instance.CloseMobileControls();
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
             LookX = Input.GetAxis("Mouse X")* mouseSensitivity * Time.deltaTime;

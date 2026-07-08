@@ -245,6 +245,10 @@ public class UiManager : MonoBehaviour
     {
         mobileControlsPanel.SetActive(true);
     }
+    public void CloseMobileControls()
+    {
+        mobileControlsPanel.SetActive(false);
+    }
     public void ShowClaimButton()
     {
         claimButton.SetActive(true);
