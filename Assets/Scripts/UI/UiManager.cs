@@ -161,8 +161,9 @@ public class UiManager : MonoBehaviour
     public void RetryButton()
     {
         AudioManager.instance.PlayButtonClick();
-         isRetry=true;
-         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        isRetry=true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Cursor.lockState=CursorLockMode.Locked;
     }
     public void ShowInventory()
     {
