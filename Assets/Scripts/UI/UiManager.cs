@@ -144,19 +144,23 @@ public class UiManager : MonoBehaviour
     }
     public void PlayButton()
     {
+        AudioManager.instance.PlayButtonClick();
         mainMenuPanel.SetActive(false);
         levelsPanel.SetActive(true);  
     }
     public void ExitButton()
     {
+        AudioManager.instance.PlayButtonClick();
         Application.Quit();
     }
     public void RestartButton()
     {
+        AudioManager.instance.PlayButtonClick();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void RetryButton()
     {
+        AudioManager.instance.PlayButtonClick();
          isRetry=true;
          SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -167,11 +171,13 @@ public class UiManager : MonoBehaviour
     }
     public void ShowLevelsPanel()
     {
+        AudioManager.instance.PlayButtonClick();
         levelsPanel.SetActive(true);
         Cursor.lockState=CursorLockMode.None;
     }
     public void PracticeButton()
     {
+        AudioManager.instance.PlayButtonClick();
         if (Application.isMobilePlatform)
         {
             ShowMobileControls();
@@ -189,7 +195,7 @@ public class UiManager : MonoBehaviour
         {
             doorKeys[k].gameObject.SetActive(true);
         }
-        Cursor.lockState=CursorLockMode.None;
+        Cursor.lockState=CursorLockMode.Locked;
         playerMovement.enabled=true;
         playerAttack.enabled=true;
         Time.timeScale=1f;
@@ -203,6 +209,7 @@ public class UiManager : MonoBehaviour
     }
     public void EasyButton()
     {
+        AudioManager.instance.PlayButtonClick();
         if (Application.isMobilePlatform)
         {
             ShowMobileControls();
@@ -225,6 +232,7 @@ public class UiManager : MonoBehaviour
     }
     public void HardButton()
     {
+        AudioManager.instance.PlayButtonClick();
         if (Application.isMobilePlatform)
         {
             ShowMobileControls();

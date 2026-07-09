@@ -14,7 +14,9 @@ public class PlayerAttack : MonoBehaviour
     {
         if (InputManager.attack)
         {
+
             Attack();
+            
         }
         
     }
@@ -25,6 +27,7 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
         player.playerAnimations.PlayAttackAnimation();
+        AudioManager.instance.NormalPlayerAttack();
         
     }
 }

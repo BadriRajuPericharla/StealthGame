@@ -35,6 +35,7 @@ public class TreasureOpening : MonoBehaviour
             }
             if (allKeysCollected)
             {
+               
                 animator.SetBool("IsOpen",true);
                 pointLight.SetActive(true);
                 StartCoroutine(GameComplete());
@@ -45,6 +46,7 @@ public class TreasureOpening : MonoBehaviour
     }
     IEnumerator GameComplete()
     {
+        AudioManager.instance.PlayTreasureOpening();
         yield return new WaitForSeconds(1.5f);
         UiManager.Instance.ShowGameComplete();
     }

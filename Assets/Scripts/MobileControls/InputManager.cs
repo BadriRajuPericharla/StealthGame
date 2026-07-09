@@ -8,10 +8,10 @@ public class InputManager : MonoBehaviour
     public static float Vertical;
     public static float LookX;
     public static float LookY;
-    public static bool interact;
-    public static bool treasureInteract;
-    public static bool attack;
-    public static bool doorOpen;
+    public static bool interact=false;
+    public static bool treasureInteract=false;
+    public static bool attack=false;
+    public static bool doorOpen=false;
 
     [SerializeField] private VariableJoystick joystick;
     [SerializeField] private float touchSensitivity = 5f;

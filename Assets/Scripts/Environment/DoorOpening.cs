@@ -19,6 +19,7 @@ public class DoorOpening : MonoBehaviour
         if(InputManager.doorOpen  && !hasOpened1 && inventory.HasDoorKey(RequiredKey) && distance<4f&&PlayerInteraction.canOpenDoor)
         {
             UiManager.Instance.CloseDoorOpenButton();
+            AudioManager.instance.PlayDoorOpen();
             isOpenDoor1 = true;
             hasOpened1=true;
             Invoke("stopdoor",1f);
@@ -30,6 +31,7 @@ public class DoorOpening : MonoBehaviour
         }
         if (isOpenDoor1)
         {
+           
             transform.Translate(Vector3.up * 3f * Time.deltaTime,Space.World);
         }
     }

@@ -9,6 +9,7 @@ public class PlayerDetection : MonoBehaviour
     [SerializeField]private PlayerMovement playerMovement;
     [SerializeField]private PlayerAttack playerAttack;
     [SerializeField]private GameObject deathCam;
+    [SerializeField]private GameObject globalVolume;
     bool enemyDetectedPlayer=false;
     NavMeshAgent navMeshAgent;
     bool hasAttacked=false;
@@ -41,11 +42,14 @@ public class PlayerDetection : MonoBehaviour
                     if (!enemyDetectedPlayer)
                     {
                         enemyDetectedPlayer=true;
+                        globalVolume.SetActive(true);
                         EnemyManager.Instance.EnemyDetectedPlayer();
 
                     }
+                    
                     navMeshAgent.isStopped=false;
                     navMeshAgent.speed=4f;
+                    
                     navMeshAgent.SetDestination(player.position);
                     Debug.Log("Detected"); 
                     if (distance < 2f)
@@ -79,16 +83,20 @@ public class PlayerDetection : MonoBehaviour
             if (enemyDetectedPlayer)
             {
                 enemyDetectedPlayer = false;
+                navMeshAgent.isStopped=false;
+                globalVolume.SetActive(false);
                 EnemyManager.Instance.EnemyLostPlayer();
             }
-            navMeshAgent.isStopped=false;
+            
             navMeshAgent.speed=2f;
         }
         
     }
     IEnumerator GameOver()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
+        AudioManager.instance.PlayEnemyAttack();
+        yield return new WaitForSeconds(1.5f);
         UiManager.Instance.ShowGameOver();
     }
 }

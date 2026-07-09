@@ -54,7 +54,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (hit.collider.CompareTag("DoorKey")&&InputManager.interact)
         {
-
+            AudioManager.instance.PlayKeyCollection();
                 
             for(int i = 0; i < keys.DoorKeyPrefab.Length; i++)
             {
@@ -71,6 +71,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         else if (hit.collider.CompareTag("TreasureKey")&&InputManager.interact)
         {
+            AudioManager.instance.PlayKeyCollection();
             for(int i = 0; i < keys.TreasureKeyPrefab.Length; i++)
             {
                 if (hit.collider.gameObject.name.Contains(keys.TreasureKeyPrefab[i].name))
@@ -88,7 +89,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             canOpenTreasure=true;
         }
-        else if (hit.collider.CompareTag("Enemy") && InputManager.interact)
+        else if (hit.collider.CompareTag("Enemy") && InputManager.attack)
         {
             enemyDetected=true;
         }

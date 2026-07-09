@@ -27,7 +27,7 @@ public class EnemyDie : MonoBehaviour
     void Update()
     {
         float distance=Vector3.Distance(transform.position,PlayerPosition.transform.position);
-        if(!isDead && distance<AttackRange &&EnemyManager.Instance.detectedEnemies==0&& playerInteraction.enemyDetected)
+        if(!isDead && distance<AttackRange &&EnemyManager.Instance.detectedEnemies==0 && playerInteraction.enemyDetected)
         {
             playerInteraction.enemyDetected=false;
             isDead=true;
@@ -41,6 +41,7 @@ public class EnemyDie : MonoBehaviour
     }
     IEnumerator Death()
     {
+        AudioManager.instance.PlayPlayerAttack();
         enemyAnimations.PlayDeathAnimation();
         SpotLigth.SetActive(false);
         yield return new WaitForSeconds(1f);
