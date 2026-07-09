@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
     public static float LookX;
     public static float LookY;
     public static bool interact;
+    public static bool treasureInteract;
     public static bool attack;
     public static bool doorOpen;
 
@@ -24,7 +25,7 @@ public class InputManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            interact=true;
+            treasureInteract=true;
         }
         if (!Application.isMobilePlatform)
         {
@@ -63,6 +64,10 @@ public class InputManager : MonoBehaviour
     {
         interact=true;
     }
+    public void TreasureInteract()
+    {
+        treasureInteract=true;
+    }
     public void mobileAttack()
     {
         attack=true;
@@ -76,6 +81,7 @@ public class InputManager : MonoBehaviour
         interact=false;
         attack=false;
         doorOpen=false;
+        treasureInteract=false;
     }
 }
 
