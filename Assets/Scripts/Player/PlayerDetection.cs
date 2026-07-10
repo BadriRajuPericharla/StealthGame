@@ -42,11 +42,12 @@ public class PlayerDetection : MonoBehaviour
                     if (!enemyDetectedPlayer)
                     {
                         enemyDetectedPlayer=true;
+                        AudioManager.instance.PlayDetectionAudio();
                         globalVolume.SetActive(true);
                         EnemyManager.Instance.EnemyDetectedPlayer();
 
                     }
-                    
+                   
                     navMeshAgent.isStopped=false;
                     navMeshAgent.speed=4f;
                     

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -40,6 +41,7 @@ public class TreasureOpening : MonoBehaviour
                 pointLight.SetActive(true);
                 StartCoroutine(GameComplete());
                 Debug.Log("Win");
+                enabled=false;
             }
             
         }
@@ -49,5 +51,6 @@ public class TreasureOpening : MonoBehaviour
         AudioManager.instance.PlayTreasureOpening();
         yield return new WaitForSeconds(1.5f);
         UiManager.Instance.ShowGameComplete();
+        
     }
 }

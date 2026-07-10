@@ -6,7 +6,13 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+public enum gameMode
+{
+    none,
+    easy,
+    practice,
+    hard
+}
 public class UiManager : MonoBehaviour
 {
     [SerializeField]private PlayerMovement playerMovement;
@@ -37,7 +43,7 @@ public class UiManager : MonoBehaviour
     [SerializeField]private EnemyPatrol[] enemyPatrol;
     [SerializeField]private RandomPatrol[] randomPatrols;
     [SerializeField]private GameObject[] doorKeys;
-    
+    public static gameMode currentMode = gameMode.none;
     bool isInventoryOpen=false;
     public static UiManager Instance;
     public static bool isRetry=false;
@@ -83,16 +89,6 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            mainMenuPanel.SetActive(false);
-            playerMovement.enabled=true;
-            Time.timeScale=1f;
-            foreach(PlayerDetection enemy in playerDetection)
-            {
-                enemy.enabled=true;
-            }
-            playerAttack.enabled=true;
-            cameraMovement.enabled=true;
-            playerInteraction.enabled=true;
             playButton.onClick.AddListener(PlayButton);
             restartButton.onClick.AddListener(RestartButton);
             retryButton.onClick.AddListener(RetryButton);
@@ -106,6 +102,19 @@ public class UiManager : MonoBehaviour
             foreach (Button button in exitButton)
             {
                 button.onClick.AddListener(ExitButton);
+            }
+            switch (currentMode)
+            {
+                case gameMode.practice:
+                    PracticeButton();
+                    break;
+                case gameMode.easy:
+                    EasyButton();
+                    break;
+                case gameMode.hard:
+                    HardButton();
+                    break;
+                
             }
         }
         
@@ -178,6 +187,7 @@ public class UiManager : MonoBehaviour
     }
     public void PracticeButton()
     {
+        currentMode=gameMode.practice;
         AudioManager.instance.PlayButtonClick();
         if (Application.isMobilePlatform)
         {
@@ -210,6 +220,7 @@ public class UiManager : MonoBehaviour
     }
     public void EasyButton()
     {
+        currentMode=gameMode.easy;
         AudioManager.instance.PlayButtonClick();
         if (Application.isMobilePlatform)
         {
@@ -233,6 +244,7 @@ public class UiManager : MonoBehaviour
     }
     public void HardButton()
     {
+        currentMode=gameMode.hard;
         AudioManager.instance.PlayButtonClick();
         if (Application.isMobilePlatform)
         {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AudioManager : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField]private AudioClip keyCollection;
     [SerializeField]private AudioClip treasureOpening;
     [SerializeField]private AudioClip normalPlayerAttack;
-    AudioSource audioSource;
+    [SerializeField]private AudioClip detectionAudio;
+     public AudioSource audioSource;
     void Awake()
     {
         if (instance == null)
@@ -24,10 +26,6 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-    void Start()
-    {
-        audioSource=GetComponent<AudioSource>();
     }
     public void PlayButtonClick()
     {
@@ -56,5 +54,9 @@ public class AudioManager : MonoBehaviour
     public void NormalPlayerAttack()
     {
         audioSource.PlayOneShot(normalPlayerAttack);
+    }
+    public void PlayDetectionAudio()
+    {
+        audioSource.PlayOneShot(detectionAudio);
     }
 }
