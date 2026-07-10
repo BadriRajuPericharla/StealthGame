@@ -12,10 +12,14 @@ public class RandomPatrol : MonoBehaviour
     }
     void Update()
     {
-        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5)
+        if (navMeshAgent.isActiveAndEnabled)
         {
-            RandomPatroling();
+            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5)
+            {
+                RandomPatroling();
+            }
         }
+        
     }
     public void RandomPatroling()
     {

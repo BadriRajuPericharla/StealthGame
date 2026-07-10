@@ -27,6 +27,9 @@ public class UiManager : MonoBehaviour
     [SerializeField]private GameObject levelsPanel;
     [SerializeField]private GameObject inventoryPanel;
     [SerializeField]private GameObject mobileControlsPanel;
+    [SerializeField]private GameObject aboutPanel;
+    [SerializeField]private Button aboutButton;
+    [SerializeField]private Button backButton;
     [SerializeField]private Button playButton;
     [SerializeField]private Button[] exitButton;
     [SerializeField]private Button restartButton;
@@ -82,6 +85,8 @@ public class UiManager : MonoBehaviour
             attackButton.onClick.AddListener(inputManager.mobileAttack);
             claim.onClick.AddListener(inputManager.mobileInteract);
             doorOpen.onClick.AddListener(inputManager.DoorOpen);
+            aboutButton.onClick.AddListener(ShowAboutPanel);
+            backButton.onClick.AddListener(BackButton);
             foreach (Button button in exitButton)
             {
                 button.onClick.AddListener(ExitButton);
@@ -99,6 +104,8 @@ public class UiManager : MonoBehaviour
             attackButton.onClick.AddListener(inputManager.mobileAttack);
             claim.onClick.AddListener(inputManager.mobileInteract);
             doorOpen.onClick.AddListener(inputManager.DoorOpen);
+            aboutButton.onClick.AddListener(ShowAboutPanel);
+            backButton.onClick.AddListener(BackButton);
             foreach (Button button in exitButton)
             {
                 button.onClick.AddListener(ExitButton);
@@ -285,6 +292,16 @@ public class UiManager : MonoBehaviour
     public void CloseDoorOpenButton()
     {
         doorOpenButton.SetActive(false);
+    }
+    public void ShowAboutPanel()
+    {
+        AudioManager.instance.PlayButtonClick();
+        aboutPanel.SetActive(true);
+    }
+    public void BackButton()
+    {
+        AudioManager.instance.PlayButtonClick();
+        aboutPanel.SetActive(false);
     }
     void Update()
     {
