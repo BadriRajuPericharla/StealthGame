@@ -30,6 +30,7 @@ public class TreasureOpening : MonoBehaviour
                 
                 if (!inventoryManager.HasTreasureKey(RequiredKeyNames[i]))
                 {
+                    MessageText.instance.TreasureOpenMessage();
                     allKeysCollected=false;
                     break;
                 }

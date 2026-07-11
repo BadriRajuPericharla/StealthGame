@@ -8,7 +8,7 @@ public class DoorOpening : MonoBehaviour
     public Transform player;
     public InventoryManager inventory;
     public string RequiredKey;
-    [SerializeField]private MessageText messageText;
+
     private bool isOpenDoor1 = false;
     bool hasOpened1=false;
     
@@ -27,7 +27,7 @@ public class DoorOpening : MonoBehaviour
         }
         if(InputManager.doorOpen && !inventory.HasDoorKey(RequiredKey) && distance<4f)
         {
-            messageText.KeyCollectMessage();
+            MessageText.instance.KeyCollectMessage();
         }
         if (isOpenDoor1)
         {
