@@ -18,7 +18,7 @@ public class TouchLook : MonoBehaviour
             {
                 if (touch.phase == TouchPhase.Moved)
                 {
-                    lookInput = touch.deltaPosition * sensitivity * Time.deltaTime;
+                    lookInput = -touch.deltaPosition * sensitivity * Time.deltaTime;
                     break;
                 }
             }

@@ -28,6 +28,13 @@ public class UiManager : MonoBehaviour
     [SerializeField]private GameObject inventoryPanel;
     [SerializeField]private GameObject mobileControlsPanel;
     [SerializeField]private GameObject aboutPanel;
+    [SerializeField]private GameObject settingsPanel;
+    [SerializeField]private GameObject sensitivityPanel;
+    [SerializeField]private GameObject audioPanel;
+    [SerializeField]private Button audioButton;
+    [SerializeField]private Button sensitivityButton;
+    [SerializeField]private Button settingsIconButton;
+    [SerializeField]private Button settingsButton;
     [SerializeField]private Button aboutButton;
     [SerializeField]private Button backButton;
     [SerializeField]private Button playButton;
@@ -86,7 +93,11 @@ public class UiManager : MonoBehaviour
             claim.onClick.AddListener(inputManager.mobileInteract);
             doorOpen.onClick.AddListener(inputManager.DoorOpen);
             aboutButton.onClick.AddListener(ShowAboutPanel);
-            backButton.onClick.AddListener(BackButton);
+            backButton.onClick.AddListener(CloseSetiingsPanel);
+            settingsIconButton.onClick.AddListener(ShowSettingsPanel);
+            sensitivityButton.onClick.AddListener(ShowSensitivityPanel);
+            audioButton.onClick.AddListener(ShowAudioPanel);
+            settingsButton.onClick.AddListener(ShowSettingsPanel);
             foreach (Button button in exitButton)
             {
                 button.onClick.AddListener(ExitButton);
@@ -105,7 +116,11 @@ public class UiManager : MonoBehaviour
             claim.onClick.AddListener(inputManager.mobileInteract);
             doorOpen.onClick.AddListener(inputManager.DoorOpen);
             aboutButton.onClick.AddListener(ShowAboutPanel);
-            backButton.onClick.AddListener(BackButton);
+            backButton.onClick.AddListener(CloseSetiingsPanel);
+            settingsIconButton.onClick.AddListener(ShowSettingsPanel);
+            sensitivityButton.onClick.AddListener(ShowSensitivityPanel);
+            audioButton.onClick.AddListener(ShowAudioPanel);
+            settingsButton.onClick.AddListener(ShowSettingsPanel);
             foreach (Button button in exitButton)
             {
                 button.onClick.AddListener(ExitButton);
@@ -215,7 +230,7 @@ public class UiManager : MonoBehaviour
         }
         if (!Application.isMobilePlatform)
         {
-            Cursor.lockState=CursorLockMode.Locked;
+            Cursor.lockState=CursorLockMode.None;
         }
         
         playerMovement.enabled=true;
@@ -240,7 +255,7 @@ public class UiManager : MonoBehaviour
         levelsPanel.SetActive(false);
         if (!Application.isMobilePlatform)
         {
-            Cursor.lockState=CursorLockMode.Locked;
+            Cursor.lockState=CursorLockMode.None;
         }
         playerMovement.enabled=true;
         playerAttack.enabled=true;
@@ -307,10 +322,31 @@ public class UiManager : MonoBehaviour
     {
         AudioManager.instance.PlayButtonClick();
         aboutPanel.SetActive(true);
+        audioPanel.SetActive(false);
+        sensitivityPanel.SetActive(false);
     }
-    public void BackButton()
+    public void ShowSettingsPanel()
     {
         AudioManager.instance.PlayButtonClick();
+        settingsPanel.SetActive(true);
+    }
+    public void CloseSetiingsPanel()
+    {
+        AudioManager.instance.PlayButtonClick();
+        settingsPanel.SetActive(false);
+    }
+    public void ShowAudioPanel()
+    {
+        AudioManager.instance.PlayButtonClick();
+        audioPanel.SetActive(true);
+        sensitivityPanel.SetActive(false);
+        aboutPanel.SetActive(false);
+    }
+    public void ShowSensitivityPanel()
+    {
+        AudioManager.instance.PlayButtonClick();
+        audioPanel.SetActive(false);
+        sensitivityPanel.SetActive(true);
         aboutPanel.SetActive(false);
     }
     void Update()
