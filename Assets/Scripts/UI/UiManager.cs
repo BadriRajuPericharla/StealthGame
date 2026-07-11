@@ -213,7 +213,11 @@ public class UiManager : MonoBehaviour
         {
             doorKeys[k].gameObject.SetActive(true);
         }
-        Cursor.lockState=CursorLockMode.Locked;
+        if (!Application.isMobilePlatform)
+        {
+            Cursor.lockState=CursorLockMode.Locked;
+        }
+        
         playerMovement.enabled=true;
         playerAttack.enabled=true;
         Time.timeScale=1f;
@@ -234,7 +238,10 @@ public class UiManager : MonoBehaviour
             ShowMobileControls();
         }
         levelsPanel.SetActive(false);
-        Cursor.lockState=CursorLockMode.Locked;
+        if (!Application.isMobilePlatform)
+        {
+            Cursor.lockState=CursorLockMode.Locked;
+        }
         playerMovement.enabled=true;
         playerAttack.enabled=true;
         Time.timeScale=1f;
@@ -257,8 +264,11 @@ public class UiManager : MonoBehaviour
         {
             ShowMobileControls();
         }
+        if (!Application.isMobilePlatform)
+        {
+            Cursor.lockState=CursorLockMode.Locked;
+        }
         levelsPanel.SetActive(false);
-        Cursor.lockState=CursorLockMode.Locked;
         playerMovement.enabled=true;
         playerAttack.enabled=true;
         Time.timeScale=1f;
