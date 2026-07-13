@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -31,14 +32,19 @@ public class UiManager : MonoBehaviour
     [SerializeField]private GameObject settingsPanel;
     [SerializeField]private GameObject sensitivityPanel;
     [SerializeField]private GameObject audioPanel;
+    [SerializeField]private GameObject windowsControlsPanel;
+    [SerializeField]private GameObject pausePanel;
+    [SerializeField]private GameObject countDownPanel;
     [SerializeField]private Button audioButton;
     [SerializeField]private Button sensitivityButton;
     [SerializeField]private Button settingsIconButton;
+    [SerializeField]private Button pauseIconButtton;
     [SerializeField]private Button settingsButton;
     [SerializeField]private Button aboutButton;
     [SerializeField]private Button backButton;
     [SerializeField]private Button playButton;
-    [SerializeField]private Button[] exitButton;
+    [SerializeField]private Button exitButton;
+    [SerializeField]private Button[] redirectExitButton;
     [SerializeField]private Button restartButton;
     [SerializeField]private Button retryButton;
     [SerializeField]private Button inventoryButton;
@@ -48,13 +54,17 @@ public class UiManager : MonoBehaviour
     [SerializeField]private Button attackButton;
     [SerializeField]private Button claim;
     [SerializeField]private Button doorOpen;
+    [SerializeField]private Button resumeButton;
     [SerializeField]private GameObject doorOpenButton;
     [SerializeField]private GameObject claimButton;
+    [SerializeField]private TextMeshProUGUI countDownText;
     [SerializeField]private EnemyPatrol[] enemyPatrol;
     [SerializeField]private RandomPatrol[] randomPatrols;
     [SerializeField]private GameObject[] doorKeys;
     public static gameMode currentMode = gameMode.none;
     bool isInventoryOpen=false;
+    bool isWindowsControlsOpen=true;
+    bool isPause=false;
     public static UiManager Instance;
     public static bool isRetry=false;
     void Awake()
@@ -73,12 +83,9 @@ public class UiManager : MonoBehaviour
         if (!isRetry)
         {
             mainMenuPanel.SetActive(true);
-            playerMovement.enabled=false;
+            
             Time.timeScale=0f;
-            foreach(PlayerDetection enemy in playerDetection)
-            {
-                enemy.enabled=false;
-            }
+            
             playerAttack.enabled=false;
             cameraMovement.enabled=false;
             playerInteraction.enabled=false;
@@ -98,9 +105,12 @@ public class UiManager : MonoBehaviour
             sensitivityButton.onClick.AddListener(ShowSensitivityPanel);
             audioButton.onClick.AddListener(ShowAudioPanel);
             settingsButton.onClick.AddListener(ShowSettingsPanel);
-            foreach (Button button in exitButton)
+            resumeButton.onClick.AddListener(ResumeButton);
+            exitButton.onClick.AddListener(ExitButton);
+            pauseIconButtton.onClick.AddListener(ShowPausePanel);
+            foreach (Button button in redirectExitButton)
             {
-                button.onClick.AddListener(ExitButton);
+                button.onClick.AddListener(RestartButton);
             }
         }
         else
@@ -121,9 +131,12 @@ public class UiManager : MonoBehaviour
             sensitivityButton.onClick.AddListener(ShowSensitivityPanel);
             audioButton.onClick.AddListener(ShowAudioPanel);
             settingsButton.onClick.AddListener(ShowSettingsPanel);
-            foreach (Button button in exitButton)
+            resumeButton.onClick.AddListener(ResumeButton);
+            exitButton.onClick.AddListener(ExitButton);
+            pauseIconButtton.onClick.AddListener(ShowPausePanel);
+            foreach (Button button in redirectExitButton)
             {
-                button.onClick.AddListener(ExitButton);
+                button.onClick.AddListener(RestartButton);
             }
             switch (currentMode)
             {
@@ -143,33 +156,14 @@ public class UiManager : MonoBehaviour
     }
     public void ShowGameOver()
     {
-        playerMovement.enabled=false;
-        foreach(PlayerDetection enemy in playerDetection)
-        {
-            if (enemy != null)
-            {
-               enemy.enabled=false; 
-            } 
-        }
-        playerAttack.enabled=false;
-        cameraMovement.enabled=false;
-        playerInteraction.enabled=false;
+        DisableScripts();
         gameOverPanel.SetActive(true);
         Cursor.lockState=CursorLockMode.None;
     }
     public void ShowGameComplete()
     {
-        playerMovement.enabled=false;
-        foreach(PlayerDetection enemy in playerDetection)
-        {
-            if (enemy != null)
-            {
-                enemy.enabled=false;
-            }
-        }
-        playerAttack.enabled=false;
-        cameraMovement.enabled=false;
-        playerInteraction.enabled=false;
+        
+        DisableScripts();
         gameCompletePanel.SetActive(true);
         Cursor.lockState=CursorLockMode.None;
     }
@@ -209,6 +203,7 @@ public class UiManager : MonoBehaviour
     }
     public void PracticeButton()
     {
+        isPause=true;
         currentMode=gameMode.practice;
         AudioManager.instance.PlayButtonClick();
         if (Application.isMobilePlatform)
@@ -228,24 +223,22 @@ public class UiManager : MonoBehaviour
         {
             doorKeys[k].gameObject.SetActive(true);
         }
-        if (!Application.isMobilePlatform)
+        if (Application.isMobilePlatform)
         {
             Cursor.lockState=CursorLockMode.None;
         }
-        
-        playerMovement.enabled=true;
-        playerAttack.enabled=true;
-        Time.timeScale=1f;
-        foreach(PlayerDetection enemy in playerDetection)
+        else
         {
-            enemy.enabled=true;
+            Cursor.lockState=CursorLockMode.Locked;
         }
-        cameraMovement.enabled=true;
-        playerInteraction.enabled=true;
+        EnableScripts();
+        
+        
 
     }
     public void EasyButton()
     {
+        isPause=true;
         currentMode=gameMode.easy;
         AudioManager.instance.PlayButtonClick();
         if (Application.isMobilePlatform)
@@ -253,46 +246,41 @@ public class UiManager : MonoBehaviour
             ShowMobileControls();
         }
         levelsPanel.SetActive(false);
-        if (!Application.isMobilePlatform)
+        if (Application.isMobilePlatform)
         {
             Cursor.lockState=CursorLockMode.None;
         }
-        playerMovement.enabled=true;
-        playerAttack.enabled=true;
+        else
+        {
+            Cursor.lockState=CursorLockMode.Locked;
+        }
         Time.timeScale=1f;
         for(int j = 0; j < randomPatrols.Length; j++)
         {
             randomPatrols[j].gameObject.SetActive(false);
         }
-        foreach(PlayerDetection enemy in playerDetection)
-        {
-            enemy.enabled=true;
-        }
-        cameraMovement.enabled=true;
-        playerInteraction.enabled=true;
+        EnableScripts();
     }
     public void HardButton()
     {
+        isPause=true;
         currentMode=gameMode.hard;
         AudioManager.instance.PlayButtonClick();
         if (Application.isMobilePlatform)
         {
             ShowMobileControls();
         }
-        if (!Application.isMobilePlatform)
+        if (Application.isMobilePlatform)
+        {
+            Cursor.lockState=CursorLockMode.None;
+        }
+        else
         {
             Cursor.lockState=CursorLockMode.Locked;
         }
         levelsPanel.SetActive(false);
-        playerMovement.enabled=true;
-        playerAttack.enabled=true;
         Time.timeScale=1f;
-        foreach(PlayerDetection enemy in playerDetection)
-        {
-            enemy.enabled=true;
-        }
-        cameraMovement.enabled=true;
-        playerInteraction.enabled=true;
+        EnableScripts();
     }
     public void ShowMobileControls()
     {
@@ -320,6 +308,7 @@ public class UiManager : MonoBehaviour
     }
     public void ShowAboutPanel()
     {
+        isPause=false;
         AudioManager.instance.PlayButtonClick();
         aboutPanel.SetActive(true);
         audioPanel.SetActive(false);
@@ -327,34 +316,131 @@ public class UiManager : MonoBehaviour
     }
     public void ShowSettingsPanel()
     {
+        isPause=false;
         AudioManager.instance.PlayButtonClick();
+        DisableScripts();
+        if (!Application.isMobilePlatform)
+        {
+            Cursor.lockState=CursorLockMode.None;
+        }
         settingsPanel.SetActive(true);
+        Time.timeScale=0f;
     }
     public void CloseSetiingsPanel()
     {
+        isPause=true;
         AudioManager.instance.PlayButtonClick();
         settingsPanel.SetActive(false);
+        EnableScripts();
+        Time.timeScale=1f;
     }
     public void ShowAudioPanel()
     {
+        isPause=false;
         AudioManager.instance.PlayButtonClick();
         audioPanel.SetActive(true);
         sensitivityPanel.SetActive(false);
         aboutPanel.SetActive(false);
     }
+    public void ShowWindowsControls()
+    {
+        if (!Application.isMobilePlatform)
+        {
+            isWindowsControlsOpen=!isWindowsControlsOpen;
+            windowsControlsPanel.SetActive(isWindowsControlsOpen);
+        }
+        else
+        {
+            windowsControlsPanel.SetActive(false);
+        }
+        
+    }
     public void ShowSensitivityPanel()
     {
+        isPause=false;
         AudioManager.instance.PlayButtonClick();
         audioPanel.SetActive(false);
         sensitivityPanel.SetActive(true);
         aboutPanel.SetActive(false);
     }
+    public void EnableScripts()
+    {
+        playerMovement.enabled=true;
+        playerAttack.enabled=true;
+        Time.timeScale=1f;
+        foreach(PlayerDetection enemy in playerDetection)
+        {
+            enemy.enabled=true;
+        }
+        cameraMovement.enabled=true;
+        playerInteraction.enabled=true;
+    }
+    public void DisableScripts()
+    {
+        playerAttack.enabled=false;
+        cameraMovement.enabled=false;
+        playerInteraction.enabled=false;
+        playerMovement.enabled=false;
+        foreach(PlayerDetection enemy in playerDetection)
+        {
+            if (enemy != null)
+            {
+                enemy.enabled=false;
+            }
+        }
+    }
+    public void ShowPausePanel()
+    {
+        DisableScripts();
+        pausePanel.SetActive(true);
+        Time.timeScale=0f;
+        if (!Application.isMobilePlatform)
+        {
+            Cursor.lockState=CursorLockMode.None;
+        }
+    }
+    public void ResumeButton()
+    {
+        isPause=false;
+        pausePanel.SetActive(false);
+        Time.timeScale=1f;
+        StartCoroutine(CountDown());
+        
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (!Application.isMobilePlatform)
         {
-            ShowInventory();
-            
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                ShowInventory();   
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                ShowSettingsPanel();
+            }
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                ShowWindowsControls();
+            }
+            if (Input.GetKeyDown(KeyCode.Escape)&& isPause)
+            {
+                ShowPausePanel();
+            }
         }
+        
+    }
+    IEnumerator CountDown()
+    {
+        countDownPanel.SetActive(true);
+        countDownText.text="3";
+        yield return new WaitForSeconds(1);
+        countDownText.text="2";
+        yield return new WaitForSeconds(1);
+        countDownText.text="1";
+        yield return new WaitForSeconds(1);
+        countDownPanel.SetActive(false);
+        isPause=true;
+        EnableScripts();
     }
 }
