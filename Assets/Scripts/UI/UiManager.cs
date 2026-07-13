@@ -392,6 +392,7 @@ public class UiManager : MonoBehaviour
     public void ShowPausePanel()
     {
         DisableScripts();
+        AudioManager.instance.PlayButtonClick();
         pausePanel.SetActive(true);
         Time.timeScale=0f;
         if (!Application.isMobilePlatform)
@@ -402,6 +403,7 @@ public class UiManager : MonoBehaviour
     public void ResumeButton()
     {
         isPause=false;
+        AudioManager.instance.PlayButtonClick();
         pausePanel.SetActive(false);
         Time.timeScale=1f;
         StartCoroutine(CountDown());

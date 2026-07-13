@@ -44,26 +44,23 @@ public class InputManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            interact=true;
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            treasureInteract=true;
-        }
-        if (!Application.isMobilePlatform)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                attack=true;
-            }
-        }
         if (!Application.isMobilePlatform)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
                 doorOpen=true;
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                interact=true;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                treasureInteract=true;
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                attack=true;
             }
         }
         
