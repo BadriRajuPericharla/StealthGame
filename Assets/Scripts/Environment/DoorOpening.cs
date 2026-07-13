@@ -25,7 +25,7 @@ public class DoorOpening : MonoBehaviour
             Invoke("stopdoor",1f);
             
         }
-        if(InputManager.doorOpen && !inventory.HasDoorKey(RequiredKey) && distance<4f)
+        if(InputManager.doorOpen && !inventory.HasDoorKey(RequiredKey) && distance<4f &&PlayerInteraction.canOpenDoor)
         {
             MessageText.instance.KeyCollectMessage();
         }

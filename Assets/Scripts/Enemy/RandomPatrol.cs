@@ -6,9 +6,15 @@ using UnityEngine.AI;
 public class RandomPatrol : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
+    private static NavMeshTriangulation navMesh;
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        if (navMesh.vertices == null || navMesh.vertices.Length == 0)
+        {
+            navMesh = NavMesh.CalculateTriangulation();
+        }
+
     }
     void Update()
     {
@@ -23,8 +29,7 @@ public class RandomPatrol : MonoBehaviour
     }
     public void RandomPatroling()
     {
-        NavMeshTriangulation navMesh=NavMesh.CalculateTriangulation();
-        int randomIndex=Random.Range(0,navMesh.vertices.Length);
+        int randomIndex = Random.Range(0, navMesh.vertices.Length);
         navMeshAgent.SetDestination(navMesh.vertices[randomIndex]);
     }
 }

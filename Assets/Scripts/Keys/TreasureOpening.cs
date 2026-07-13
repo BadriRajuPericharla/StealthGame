@@ -30,7 +30,6 @@ public class TreasureOpening : MonoBehaviour
                 
                 if (!inventoryManager.HasTreasureKey(RequiredKeyNames[i]))
                 {
-                    MessageText.instance.TreasureOpenMessage();
                     allKeysCollected=false;
                     break;
                 }
@@ -43,6 +42,12 @@ public class TreasureOpening : MonoBehaviour
                 StartCoroutine(GameComplete());
                 Debug.Log("Win");
                 enabled=false;
+            }
+            else
+            {
+                MessageText.instance.KeyCollectMessage();
+
+                playerInteraction.canOpenTreasure = false;
             }
             
         }

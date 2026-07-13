@@ -44,14 +44,20 @@ public class PlayerInteraction : MonoBehaviour
 
             KeysClaimimg();
         }
-        else if(Application.isMobilePlatform)
+        else
         {
-            UiManager.Instance.CloseCliamButton();
-            UiManager.Instance.CloseDoorOpenButton();
+            canOpenDoor=false;
+            if(Application.isMobilePlatform)
+            {
+                UiManager.Instance.CloseCliamButton();
+                UiManager.Instance.CloseDoorOpenButton();
+            }
         }
+        
     }
     public void KeysClaimimg()
     {
+        enemyDetected=false;
         if (hit.collider.CompareTag("DoorKey")&&InputManager.interact)
         {
             AudioManager.instance.PlayKeyCollection();
@@ -71,6 +77,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         else if (hit.collider.CompareTag("TreasureKey")&&InputManager.interact)
         {
+            
             AudioManager.instance.PlayKeyCollection();
             for(int i = 0; i < keys.TreasureKeyPrefab.Length; i++)
             {

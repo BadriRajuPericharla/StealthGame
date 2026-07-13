@@ -96,7 +96,6 @@ public class UiManager : MonoBehaviour
             practiceButton.onClick.AddListener(PracticeButton);
             easyButton.onClick.AddListener(EasyButton);
             hardButton.onClick.AddListener(HardButton);
-            attackButton.onClick.AddListener(inputManager.mobileAttack);
             claim.onClick.AddListener(inputManager.mobileInteract);
             doorOpen.onClick.AddListener(inputManager.DoorOpen);
             aboutButton.onClick.AddListener(ShowAboutPanel);
@@ -122,7 +121,6 @@ public class UiManager : MonoBehaviour
             practiceButton.onClick.AddListener(PracticeButton);
             easyButton.onClick.AddListener(EasyButton);
             hardButton.onClick.AddListener(HardButton);
-            attackButton.onClick.AddListener(inputManager.mobileAttack);
             claim.onClick.AddListener(inputManager.mobileInteract);
             doorOpen.onClick.AddListener(inputManager.DoorOpen);
             aboutButton.onClick.AddListener(ShowAboutPanel);
@@ -157,6 +155,7 @@ public class UiManager : MonoBehaviour
     public void ShowGameOver()
     {
         DisableScripts();
+        CloseMobileControls();
         gameOverPanel.SetActive(true);
         Cursor.lockState=CursorLockMode.None;
     }
@@ -164,6 +163,7 @@ public class UiManager : MonoBehaviour
     {
         
         DisableScripts();
+        CloseMobileControls();
         gameCompletePanel.SetActive(true);
         Cursor.lockState=CursorLockMode.None;
     }
@@ -393,6 +393,10 @@ public class UiManager : MonoBehaviour
     {
         DisableScripts();
         AudioManager.instance.PlayButtonClick();
+        if (Application.isMobilePlatform)
+        {
+            CloseMobileControls();
+        }
         pausePanel.SetActive(true);
         Time.timeScale=0f;
         if (!Application.isMobilePlatform)
@@ -444,5 +448,9 @@ public class UiManager : MonoBehaviour
         countDownPanel.SetActive(false);
         isPause=true;
         EnableScripts();
+        if (Application.isMobilePlatform)
+        {
+            ShowMobileControls();
+        }
     }
 }
