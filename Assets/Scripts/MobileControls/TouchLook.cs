@@ -18,7 +18,7 @@ public class TouchLook : MonoBehaviour
             {
                 if (touch.phase == TouchPhase.Moved)
                 {
-                    lookInput = Vector2.ClampMagnitude(-touch.deltaPosition * sensitivity,5f)*Time.deltaTime;
+                    lookInput = Vector2.ClampMagnitude(-touch.deltaPosition * sensitivity,300f)*Time.deltaTime;
                     break;
                 }
             }

@@ -154,6 +154,10 @@ public class UiManager : MonoBehaviour
     }
     public void ShowGameOver()
     {
+        if (Application.isMobilePlatform)
+        {
+            CloseMobileControls();
+        }
         DisableScripts();
         CloseMobileControls();
         gameOverPanel.SetActive(true);
@@ -161,7 +165,10 @@ public class UiManager : MonoBehaviour
     }
     public void ShowGameComplete()
     {
-        
+        if (Application.isMobilePlatform)
+        {
+            CloseMobileControls();
+        }
         DisableScripts();
         CloseMobileControls();
         gameCompletePanel.SetActive(true);
