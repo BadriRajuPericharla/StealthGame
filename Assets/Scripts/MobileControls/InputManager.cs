@@ -83,11 +83,9 @@ public class InputManager : MonoBehaviour
     public void mobileInteract()
     {
         interact=true;
-    }
-    public void TreasureInteract()
-    {
         treasureInteract=true;
     }
+    
     public void mobileAttack()
     {
         attack=true;

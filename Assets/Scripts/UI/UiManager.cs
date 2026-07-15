@@ -336,6 +336,10 @@ public class UiManager : MonoBehaviour
     public void CloseSetiingsPanel()
     {
         isPause=true;
+        if (!Application.isMobilePlatform)
+        {
+            Cursor.lockState=CursorLockMode.Locked;
+        }
         AudioManager.instance.PlayButtonClick();
         settingsPanel.SetActive(false);
         EnableScripts();
@@ -377,7 +381,11 @@ public class UiManager : MonoBehaviour
         Time.timeScale=1f;
         foreach(PlayerDetection enemy in playerDetection)
         {
-            enemy.enabled=true;
+            if (enemy != null)
+            {
+                enemy.enabled=true;
+            }
+            
         }
         cameraMovement.enabled=true;
         playerInteraction.enabled=true;

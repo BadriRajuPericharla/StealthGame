@@ -92,7 +92,7 @@ public class PlayerInteraction : MonoBehaviour
                 }
             }
         }
-        else if (hit.collider.CompareTag("TreasureChest") && InputManager.treasureInteract)
+        else if (hit.collider.CompareTag("TreasureChest") && InputManager.interact)
         {
             canOpenTreasure=true;
         }
