@@ -54,10 +54,6 @@ public class InputManager : MonoBehaviour
             {
                 interact=true;
             }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                treasureInteract=true;
-            }
             if (Input.GetMouseButtonDown(0))
             {
                 attack=true;
